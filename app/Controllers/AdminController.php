@@ -1,0 +1,15 @@
+<?php
+namespace App\Controllers;
+use App\Core\Controller;use App\Core\Database;use App\Models\{User,Catalog,Resource};
+class AdminController extends Controller {
+ function dashboard():void{$this->admin();$db=Database::connection();$stats=['usuarios'=>$db->query('SELECT COUNT(*) FROM users')->fetchColumn(),'docentes'=>$db->query("SELECT COUNT(*) FROM users u JOIN roles r ON r.id=u.role_id WHERE r.name='docente'")->fetchColumn(),'tests'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='test'")->fetchColumn(),'tabuladores'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='tabulador'")->fetchColumn()];$this->view('admin/dashboard',['title'=>'Panel de control','stats'=>$stats]);}
+ function users():void{$this->admin();$this->view('admin/users',['title'=>'Control de usuarios','users'=>(new User)->detailed(),'roles'=>(new Catalog('roles'))->all(),'subjects'=>(new Catalog('subjects'))->all()]);}
+ function saveUser():void{$this->admin();verify_csrf();(new User)->save($_POST,!empty($_POST['id'])?(int)$_POST['id']:null);flash('success','Usuario guardado.');redirect('/admin/usuarios');}
+ function deleteUser():void{$this->admin();verify_csrf();(new User)->delete((int)$_POST['id']);flash('success','Usuario eliminado.');redirect('/admin/usuarios');}
+ function catalogs():void{$this->admin();$this->view('admin/catalogs',['title'=>'Roles, asignaturas y grupos','roles'=>(new Catalog('roles'))->all(),'subjects'=>(new Catalog('subjects'))->all(),'groups'=>(new Catalog('tabulator_groups'))->all(),'subgroups'=>(new Catalog('tabulator_subgroups'))->all()]);}
+ function saveCatalog():void{$this->admin();verify_csrf();$type=$_POST['type'];(new Catalog($type))->saveName(trim($_POST['name']),!empty($_POST['id'])?(int)$_POST['id']:null,!empty($_POST['group_id'])?(int)$_POST['group_id']:null);flash('success','Registro guardado.');redirect('/admin/catalogos');}
+ function resources():void{$this->admin();$this->view('admin/resources',['title'=>'Tests y tabuladores','resources'=>(new Resource)->detailed(),'subjects'=>(new Catalog('subjects'))->all(),'groups'=>(new Catalog('tabulator_groups'))->all(),'subgroups'=>(new Catalog('tabulator_subgroups'))->all()]);}
+ function saveResource():void{$this->admin();verify_csrf();$file=null;if(!empty($_FILES['file']['name'])){$ext=strtolower(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION));if(!in_array($ext,config('allowed_extensions'),true))exit('Tipo de archivo no permitido');if($_FILES['file']['size']>config('max_upload_mb')*1048576)exit('Archivo demasiado grande');$dir=config('upload_dir');if(!is_dir($dir))mkdir($dir,0755,true);$name=bin2hex(random_bytes(12)).'.'.$ext;move_uploaded_file($_FILES['file']['tmp_name'],$dir.'/'.$name);$file=$name;}$_POST['file_path']=$file;(new Resource)->save($_POST,!empty($_POST['id'])?(int)$_POST['id']:null);flash('success','Recurso guardado.');redirect('/admin/recursos');}
+ function deleteResource():void{$this->admin();verify_csrf();(new Resource)->delete((int)$_POST['id']);flash('success','Recurso eliminado.');redirect('/admin/recursos');}
+}
+
