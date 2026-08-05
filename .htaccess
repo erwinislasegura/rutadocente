@@ -1,0 +1,13 @@
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+
+# Bloquea el acceso web directo al código y a los archivos sensibles.
+RewriteRule ^(?:app|config|database|storage)(?:/|$) - [F,L,NC]
+
+# Sirve los recursos públicos desde la carpeta segura del sistema.
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Envía todas las páginas y el login al router PHP existente.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ public/index.php [QSA,L]
