@@ -4,7 +4,7 @@ Aplicación para cPanel desarrollada en PHP 8.1+, PDO y MySQL 5.7/8. Incluye log
 
 ## Instalación en cPanel
 
-1. Sube todo el proyecto a `public_html`.
+1. Sube todo el proyecto a `public_html`. El `index.php` y `.htaccess` de la raíz conectan automáticamente la web pública con el sistema.
 2. Crea una base de datos y usuario MySQL desde cPanel.
 3. Importa `database/rutadocente.sql` con phpMyAdmin.
 4. Copia `config/database.local.example.php` como `config/database.local.php` y configura las credenciales.
