@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Recursos y acompañamiento para docentes de Chile">
     <title>Inicio | Ruta Docente 2026</title>
-    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260808-mobile1')?>">
+    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260808-activa1')?>">
     <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body>
@@ -141,6 +141,20 @@
                     <div class="fact"><b>Impacto</b><span>Ideas listas para aplicar.</span></div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="activaweb-credit" aria-labelledby="activaweb-title">
+        <div class="container activaweb-credit-inner">
+            <div class="activaweb-copy">
+                <span class="activaweb-kicker">COLABORADOR TECNOLÓGICO</span>
+                <h2 id="activaweb-title">Colaborador y desarrollado por <strong>Activa Web</strong></h2>
+                <p>Soluciones web escalables que respaldan una experiencia digital clara, segura y preparada para crecer.</p>
+            </div>
+            <a class="activaweb-logo" href="https://activa-web.cl/" target="_blank" rel="noopener" aria-label="Visitar Activa Web">
+                <img src="<?=url('/assets/img/activaweb-logo.png')?>" alt="Activa Web, soluciones web escalables para empresas">
+            </a>
+            <a class="activaweb-link" href="https://activa-web.cl/" target="_blank" rel="noopener">Conocer Activa Web <span>↗</span></a>
         </div>
     </section>
 </main>
