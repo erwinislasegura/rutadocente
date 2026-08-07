@@ -351,3 +351,104 @@ footer:before{content:"";position:absolute;right:-100px;top:-150px;width:320px;h
  .static-hero img,.page-photo img,.collage .big,.tests-process-photo img,.rich-grid>img{border-radius:125px 125px 12px 12px}
  .hero-image-frame:before{inset:-7px 7px 7px -7px;border-radius:130px 130px 14px 14px}
 }
+
+/* Optimización integral para celulares */
+@media(max-width:780px){
+ html,body{max-width:100%;overflow-x:hidden}
+ body{font-size:15px}
+ img,video,iframe{max-width:100%}
+ .container{width:calc(100% - 28px)}
+ header{position:sticky;top:0;z-index:1200}
+ .header-inner{gap:10px}
+ .brand{min-width:0;max-width:calc(100% - 58px)}
+ .brand img{width:150px;height:52px}
+ .menu{display:grid;place-items:center;width:44px;height:44px;flex:0 0 44px;margin-left:auto;border:1px solid #cadcec;border-radius:10px;color:var(--ink);background:#fff;font-size:23px}
+ .header-inner nav{top:69px;max-height:calc(100dvh - 70px);padding:12px 14px 22px;overflow-y:auto;border-bottom:4px solid var(--yellow);background:#fff;box-shadow:0 18px 42px rgba(3,30,76,.16)}
+ .header-inner nav a{min-height:45px;padding:13px 12px;border-bottom:1px solid #e9eef3;font-size:13px}
+ .home-hero:before,.static-hero:before{opacity:.6}
+ .hero-grid{gap:26px;padding-top:44px}
+ .home-hero h1,.static-hero h1{margin:12px 0 16px;font-size:clamp(36px,10vw,44px);line-height:1.06}
+ .hero-copy>p,.static-hero p{font-size:14px;line-height:1.65}
+ .actions{display:grid;grid-template-columns:1fr;gap:12px;margin:24px 0 28px}
+ .actions .btn,.actions .text-link{width:100%;min-height:46px}
+ .actions .text-link{display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid #cbd9e7;border-radius:9px;background:#fff}
+ .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding-top:16px}
+ .trust div{padding:0 9px;border-right:1px solid #d8e2ea;text-align:center}
+ .trust b{font-size:19px}
+ .trust span{font-size:7px;line-height:1.35}
+ .hero-visual{height:350px}
+ .hero-visual>img{right:2%;width:94%;height:96%}
+ .hero-visual:before{right:0;width:94%;height:96%}
+ .float-card{left:0;bottom:18px;max-width:210px;padding:11px 13px}
+ .float-note{right:3px;top:10px;width:82px;height:82px;padding:11px;font-size:8px}
+ .strip{font-size:9px;line-height:1.5}
+ .strip .container{display:grid;grid-template-columns:1fr 1fr;text-align:center}
+ .tests-promo-inner{grid-template-columns:1fr;gap:15px}
+ .tests-promo-copy{text-align:center}
+ .tests-promo-copy h2{font-size:20px}
+ .tests-promo-actions{display:grid;grid-template-columns:1fr;gap:9px;width:100%}
+ .tests-promo-actions small{text-align:center}
+ .section,.split-section{padding:56px 0}
+ .section-head{display:block;margin-bottom:28px}
+ .section-head h2,.section-title h2,.intro h2{font-size:29px}
+ .section-head>p{margin-top:14px}
+ .cards{gap:12px}
+ .card{min-height:auto;padding:21px 19px}
+ .card h3{font-size:17px}
+ .split{gap:36px}
+ .collage{height:350px}
+ .collage .big{width:78%;height:88%}
+ .collage .small{width:48%;height:39%;border-width:7px}
+ .badge{right:0;width:96px;height:96px;font-size:25px}
+ .cta-inner{min-height:auto;padding:45px 0}
+ .cta-inner .btn{width:100%}
+ .static-hero .wrap{gap:26px}
+ .static-hero img{height:270px}
+ .hero-highlights{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ .hero-highlights span{display:flex;align-items:center;min-height:42px}
+ .tests-process-photo{height:330px}
+ .tests-steps li{gap:13px;padding:15px 0}
+ .gallery,.gallery.tests-gallery{gap:9px}
+ .gallery img{min-height:0}
+ .feature-banner{margin-top:42px}
+ .feature-banner div{padding:26px 22px}
+ .stats-panel{gap:28px;padding:24px 20px}
+ .notice{padding:20px}
+ .downloads article{gap:13px}
+ .file-icon{width:46px;height:54px;flex:0 0 46px}
+ .contact-grid,.faq-grid{gap:34px}
+ .form{gap:17px;padding:22px 18px}
+ .form input,.form textarea,.form select,.registration-field>input:not([type=file]),.registration-field textarea,.registration-field select{font-size:16px}
+ .form .btn,.registration-submit{width:100%}
+ .faq-static details{padding:15px 14px}
+ .footer-grid{grid-template-columns:1fr;gap:28px}
+ footer{padding-top:48px}
+ footer .brand img{width:185px;height:86px}
+ .copyright{gap:8px;margin-top:30px;padding-bottom:95px;line-height:1.5}
+ .registration-hero-grid{padding:44px 0}
+ .registration-hero h1{font-size:36px}
+ .registration-content{padding:40px 0 70px}
+ .registration-grid{gap:22px}
+ .registration-field{padding:20px 17px}
+ .choice-list label,.single-check{min-height:46px}
+ .registration-aside{gap:12px}
+ .info-card,.bank-card,.help-card{padding:22px 19px}
+ .bank-card dl>div{grid-template-columns:88px minmax(0,1fr)}
+ .mobile-teacher-bar{left:8px;right:8px;border-radius:13px}
+}
+
+@media(max-width:420px){
+ .container{width:calc(100% - 22px)}
+ .brand img{width:136px;height:48px}
+ .home-hero h1,.static-hero h1{font-size:35px}
+ .hero-visual{height:315px}
+ .trust b{font-size:17px}
+ .strip .container{grid-template-columns:1fr}
+ .hero-highlights{grid-template-columns:1fr}
+ .gallery,.gallery.tests-gallery{grid-template-rows:200px repeat(4,155px)}
+ .downloads article{align-items:flex-start;flex-wrap:wrap}
+ .downloads button{margin-left:auto}
+ .bank-card dl>div{grid-template-columns:1fr;gap:4px}
+ .mobile-teacher-brand img{width:96px;flex-basis:96px}
+ .mobile-teacher-bar>a{padding:0 10px;font-size:9px}
+}
