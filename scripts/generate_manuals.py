@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output" / "pdf"
 TMP = ROOT / "tmp" / "pdfs"
 LOGO = ROOT / "public" / "assets" / "img" / "logo-ruta-docente.png"
+PDF_LOGO = TMP / "logo-manual.jpg"
 TEACHER_SCREENSHOT = ROOT.parent / "upload" / "image(20260807-224444).png"
 
 NAVY = "#031E4C"
@@ -130,7 +131,8 @@ def create_desktop_mock(filename, title, active, cards, admin=False):
             text(draw, (x + 78, yy + 52), shorten(desc, width=68, placeholder="..."), 11, MUTED)
             rounded(draw, (x + 78, yy + 86, x + 190, yy + 120), 8, BLUE)
             text(draw, (x + 134, yy + 103), "Abrir", 11, WHITE, True, "mm")
-    canvas.save(path, quality=95)
+    canvas = canvas.resize((960, 520), PILImage.Resampling.LANCZOS)
+    canvas.save(path, quality=72, optimize=True, progressive=True)
     return path
 
 
@@ -166,66 +168,76 @@ def create_mobile_mock(filename, title, items):
     text(draw, (32, 919), "Ruta Docente", 13, WHITE, True)
     rounded(draw, (356, 909, 505, 952), 10, BLUE)
     text(draw, (430, 931), "Acceso docente", 10, WHITE, True, "mm")
-    canvas.save(path, quality=95)
+    canvas = canvas.resize((405, 735), PILImage.Resampling.LANCZOS)
+    canvas.save(path, quality=72, optimize=True, progressive=True)
     return path
 
 
 def build_assets():
     TMP.mkdir(parents=True, exist_ok=True)
+    logo = PILImage.open(LOGO).convert("RGB")
+    logo.thumbnail((400, 200))
+    logo.save(PDF_LOGO, quality=76, optimize=True, progressive=True)
+    teacher_dashboard = TMP / "teacher-dashboard.jpg"
+    if TEACHER_SCREENSHOT.exists():
+        screenshot = PILImage.open(TEACHER_SCREENSHOT).convert("RGB")
+        screenshot.thumbnail((960, 520))
+        screenshot.save(teacher_dashboard, quality=72, optimize=True, progressive=True)
     assets = {}
     assets["login"] = create_desktop_mock(
-        "login.png", "Acceso a la plataforma", "Inicio",
+        "login.jpg", "Acceso a la plataforma", "Inicio",
         [("Ingresa con tu cuenta", "Utiliza el correo y la contraseña entregados por Ruta Docente."),
          ("Correo", "Escribe tu correo registrado."), ("Contraseña", "Ingresa tu clave personal."),
          ("Acceso seguro", "No compartas tus datos de acceso.")], False)
     assets["teacher_tests"] = create_desktop_mock(
-        "teacher-tests.png", "Tus test", "Tus test",
+        "teacher-tests.jpg", "Tus test", "Tus test",
         [("Tests para avanzar con seguridad", "Evaluaciones asociadas a tu asignatura y perfil."),
          ("Buscar", "Encuentra un test por su nombre."), ("Descargar", "Guarda el archivo en tu dispositivo."),
          ("Abrir en línea", "Accede a la actividad desde el botón Abrir.")], False)
     assets["teacher_tabs"] = create_desktop_mock(
-        "teacher-tabulators.png", "Tabuladores", "Tabuladores",
+        "teacher-tabulators.jpg", "Tabuladores", "Tabuladores",
         [("Organiza tus resultados", "Herramientas agrupadas para analizar avances."),
          ("Elegir grupo", "Ubica el grupo correspondiente."), ("Descargar", "Obtén la plantilla disponible."),
          ("Completar", "Registra y analiza tus resultados.")], False)
     assets["teacher_profile"] = create_desktop_mock(
-        "teacher-profile.png", "Mi perfil", "Mi perfil",
+        "teacher-profile.jpg", "Mi perfil", "Mi perfil",
         [("Actualiza tu información", "Mantén tus datos personales al día."),
          ("Foto", "Sube una imagen JPG, PNG o WebP."), ("Datos", "Revisa nombre, apellido y teléfono."),
          ("Guardar", "Confirma los cambios antes de salir.")], False)
     assets["teacher_mobile"] = create_mobile_mock(
-        "teacher-mobile.png", "Área docente",
+        "teacher-mobile.jpg", "Área docente",
         [("Inicio", "Resumen de recursos disponibles."), ("Tus test", "Evaluaciones habilitadas."),
          ("Tabuladores", "Herramientas de análisis."), ("Mi perfil", "Datos personales y fotografía.")])
     assets["admin_dashboard"] = create_desktop_mock(
-        "admin-dashboard.png", "Panel de control", "Resumen",
+        "admin-dashboard.jpg", "Panel de control", "Resumen",
         [("Resumen de la plataforma", "Indicadores de usuarios, docentes y recursos."),
          ("Usuarios", "Cuentas registradas en el sistema."), ("Tests", "Evaluaciones disponibles."),
          ("Tabuladores", "Herramientas de análisis publicadas.")], True)
     assets["admin_users"] = create_desktop_mock(
-        "admin-users.png", "Usuarios y docentes", "Usuarios y docentes",
+        "admin-users.jpg", "Usuarios y docentes", "Usuarios y docentes",
         [("Gestiona las cuentas", "Crea usuarios y controla sus permisos."),
          ("Nuevo usuario", "Registra datos y asigna un rol."), ("Permisos", "Habilita tests y tabuladores."),
          ("Estado", "Activa, edita o elimina una cuenta.")], True)
     assets["admin_resources"] = create_desktop_mock(
-        "admin-resources.png", "Gestión de recursos", "Tus test",
+        "admin-resources.jpg", "Gestión de recursos", "Tus test",
         [("Publica contenido", "Administra tests y tabuladores por asignatura."),
          ("Nombre y descripción", "Identifica claramente el recurso."), ("Archivo o enlace", "Adjunta un archivo o URL."),
          ("Asignación", "Selecciona asignatura, grupo y estado.")], True)
     assets["admin_catalogs"] = create_desktop_mock(
-        "admin-catalogs.png", "Catálogos", "Catálogos",
+        "admin-catalogs.jpg", "Catálogos", "Catálogos",
         [("Configuración general", "Valores utilizados en usuarios y recursos."),
          ("Roles", "Niveles de acceso."), ("Asignaturas", "Áreas disponibles."),
          ("Grupos", "Organización de tabuladores.")], True)
     assets["admin_form"] = create_desktop_mock(
-        "admin-form.png", "Formulario público", "Formulario público",
+        "admin-form.jpg", "Formulario público", "Formulario público",
         [("Configura las inscripciones", "Define información, campos y datos bancarios."),
          ("Información", "Título, introducción y estado."), ("Campos", "Crea y ordena preguntas."),
          ("Cuenta bancaria", "Edita valor y datos de transferencia.")], True)
     assets["admin_mobile"] = create_mobile_mock(
-        "admin-mobile.png", "Administración",
+        "admin-mobile.jpg", "Administración",
         [("Resumen", "Indicadores de la plataforma."), ("Usuarios", "Cuentas y permisos."),
          ("Recursos", "Tests y tabuladores."), ("Formulario", "Inscripciones y respuestas.")])
+    assets["teacher_dashboard"] = teacher_dashboard if teacher_dashboard.exists() else assets["teacher_mobile"]
     return assets
 
 
@@ -316,7 +328,7 @@ def on_page(canvas, doc, manual_name):
         canvas.rect(0, 0, width, height, fill=1, stroke=0)
         canvas.setFillColor(colors.HexColor(BLUE))
         canvas.rect(0, height - 7, width, 7, fill=1, stroke=0)
-        canvas.drawImage(str(LOGO), 42, height - 47, width=92, height=40, preserveAspectRatio=True, mask="auto")
+        canvas.drawImage(str(PDF_LOGO), 42, height - 47, width=92, height=40, preserveAspectRatio=True, mask="auto")
         canvas.setFont("RutaSans-Bold", 7.5)
         canvas.setFillColor(colors.HexColor(MUTED))
         canvas.drawRightString(width - 42, height - 29, manual_name.upper())
@@ -332,7 +344,7 @@ def on_page(canvas, doc, manual_name):
 def cover_story(title, subtitle, visual):
     return [
         Spacer(1, 50),
-        Image(str(LOGO), width=220, height=100),
+        Image(str(PDF_LOGO), width=220, height=100),
         Spacer(1, 22),
         Paragraph(title, styles["CoverTitle"]),
         Paragraph(subtitle, styles["CoverSub"]),
@@ -437,7 +449,7 @@ def build_teacher(assets):
         ("Escribir tus datos", "Ingresa el correo registrado y tu contraseña personal."),
         ("Entrar", "Presiona el botón de acceso. El sistema abrirá automáticamente tu área docente."),
     ], "Si el sistema informa que los datos son incorrectos, revisa mayúsculas, espacios y el correo utilizado.")
-    dashboard = TEACHER_SCREENSHOT if TEACHER_SCREENSHOT.exists() else assets["teacher_mobile"]
+    dashboard = assets["teacher_dashboard"]
     story += topic("02", "Conocer la página principal", "La portada muestra tu asignatura, la cantidad de test y tabuladores disponibles y accesos rápidos a cada módulo.", dashboard, "Vista real del área docente y sus recursos asignados.", [
         ("Revisar la asignatura", "Comprueba que el nombre mostrado corresponda a tu área."),
         ("Consultar los indicadores", "Las tarjetas informan cuántos recursos tienes disponibles."),
