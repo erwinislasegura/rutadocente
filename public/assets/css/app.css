@@ -152,3 +152,31 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
  .teacher-hero:after,.admin-intro:after{right:-90px;top:-100px}
  .library-hero{border-top-color:#ffd66f}
 }
+
+/* Navegación lateral legible y estable */
+.app-body{padding-left:272px}
+.sidebar{width:272px;padding:1.2rem 1rem}
+.sidebar .offcanvas-body{width:100%;min-width:0;overflow-x:hidden}
+.app-logo{margin-bottom:.85rem}
+.app-logo img{max-width:205px;height:82px!important}
+.sidebar-label{display:block!important;color:#9fb5c5!important;opacity:1!important;visibility:visible!important}
+.sidebar-nav{display:flex!important;width:100%;min-width:0}
+.sidebar .sidebar-nav .nav-link{display:grid!important;grid-template-columns:32px minmax(0,1fr);align-items:center;width:100%;min-width:0;min-height:43px;gap:.7rem;padding:.55rem .68rem;color:#d7e5ee!important;opacity:1!important;visibility:visible!important}
+.sidebar .sidebar-nav .nav-link>.nav-icon{display:grid!important;color:#c6d8e3!important}
+.sidebar .sidebar-nav .nav-link>span:last-child{display:block!important;min-width:0;color:inherit!important;font-size:.84rem;font-weight:650;line-height:1.25;opacity:1!important;visibility:visible!important;white-space:normal;overflow-wrap:anywhere}
+.sidebar .sidebar-nav .nav-link:hover{color:#fff!important;background:rgba(255,255,255,.09)}
+.sidebar .sidebar-nav .nav-link.active{color:#fff!important;background:#0b5fbd}
+.sidebar .sidebar-nav .nav-link.active>.nav-icon{color:#052f63!important;background:#ffd36a}
+.sidebar-divider{width:calc(100% - 1.3rem)}
+.sidebar-account{width:100%}
+.sidebar-user b{color:#fff}
+.sidebar-user small{color:#a9bdc9}
+
+@media(max-width:991.98px){
+ .app-body{padding-left:0}
+ .sidebar{width:286px}
+}
+@media(max-width:575.98px){
+ .sidebar .sidebar-nav .nav-link{min-height:46px;font-size:.88rem}
+ .sidebar .sidebar-nav .nav-link>span:last-child{font-size:.87rem}
+}

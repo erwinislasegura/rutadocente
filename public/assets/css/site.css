@@ -330,3 +330,24 @@ footer:before{content:"";position:absolute;right:-100px;top:-150px;width:320px;h
  .home-hero:before,.static-hero:before{right:-190px;top:-220px}
  .hero-visual>img,.static-hero img{box-shadow:8px 8px 0 #d9eaff,-5px -5px 0 #fff0bd}
 }
+
+/* Marco editorial curvo para imágenes principales */
+.hero-visual>img{border-radius:230px 230px 18px 18px}
+.static-hero img{border-radius:185px 185px 18px 18px}
+.page-photo img{border-radius:170px 170px 16px 16px}
+.collage .big,.tests-process-photo img,.rich-grid>img{border-radius:170px 170px 16px 16px}
+.hero-visual:before{content:"";position:absolute;z-index:0;right:-11px;top:3px;width:88%;height:94%;border:2px solid rgba(237,169,21,.7);border-radius:230px 230px 20px 20px}
+.hero-visual>img{z-index:1}
+.static-hero img,.tests-process-photo img,.rich-grid>img{border:5px solid #fff;box-shadow:0 0 0 2px #e4c36c,0 20px 48px rgba(3,30,76,.13)}
+.hero-image-frame:before{content:"";position:absolute;z-index:-1;inset:-11px 11px 11px -11px;border:2px solid rgba(237,169,21,.72);border-radius:190px 190px 20px 20px}
+.hero-image-frame{isolation:isolate}
+.hero-image-frame img{width:100%;object-fit:cover}
+.split-section .split>div:last-child{position:relative;z-index:1}
+.section-head>div,.section-title,.intro{position:relative;z-index:1}
+
+@media(max-width:780px){
+ .hero-visual>img{border-radius:180px 180px 14px 14px}
+ .hero-visual:before{border-radius:180px 180px 16px 16px}
+ .static-hero img,.page-photo img,.collage .big,.tests-process-photo img,.rich-grid>img{border-radius:125px 125px 12px 12px}
+ .hero-image-frame:before{inset:-7px 7px 7px -7px;border-radius:130px 130px 14px 14px}
+}
