@@ -180,3 +180,24 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
  .sidebar .sidebar-nav .nav-link{min-height:46px;font-size:.88rem}
  .sidebar .sidebar-nav .nav-link>span:last-child{font-size:.87rem}
 }
+
+/* Sidebar claro con contraste accesible */
+.sidebar{color:#173b63!important;border-right:1px solid #d2e0ec;background:#eaf3fb!important;background-image:none!important;box-shadow:8px 0 28px rgba(3,30,76,.07)}
+.app-logo{border-bottom-color:#cadbe9}
+.sidebar-label{color:#637f98!important;font-weight:900!important}
+.sidebar-divider{background:#cfdeea}
+.sidebar .sidebar-nav .nav-link{color:#244b70!important}
+.sidebar .sidebar-nav .nav-link>.nav-icon{color:#0b5fbd!important;background:#d9eaff!important}
+.sidebar .sidebar-nav .nav-link:hover{color:#062e59!important;background:#dceaf7!important}
+.sidebar .sidebar-nav .nav-link.active{color:#fff!important;background:#0b5fbd!important;box-shadow:0 9px 22px rgba(11,95,189,.2)}
+.sidebar .sidebar-nav .nav-link.active>.nav-icon{color:#052f63!important;background:#ffd36a!important}
+.sidebar .sidebar-nav .nav-link.active>span:last-child{color:#fff!important}
+.sidebar-account{border-top-color:#cadbe9}
+.sidebar-user b{color:#173b63!important}
+.sidebar-user small{color:#607b92!important}
+.sidebar-logout{color:#466781!important;border-color:#c7d8e6!important;background:#f4f9fd!important}
+.sidebar-logout:hover{color:#fff!important;border-color:#0b5fbd!important;background:#0b5fbd!important}
+.sidebar-logout span{color:inherit!important}
+.offcanvas-header{border-bottom:1px solid #cadbe9}
+.offcanvas-header .fw-bold{color:#173b63!important}
+.offcanvas-header .btn-close{filter:none}
