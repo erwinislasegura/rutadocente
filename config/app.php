@@ -10,4 +10,8 @@ return [
     'upload_dir' => dirname(__DIR__) . '/storage/uploads',
     'max_upload_mb' => 15,
     'allowed_extensions' => ['pdf','doc','docx','xls','xlsx','ppt','pptx','zip'],
+    'form_upload_dir' => dirname(__DIR__) . '/storage/form-submissions',
+    'form_max_upload_mb' => 10,
+    'form_allowed_extensions' => ['jpg','jpeg','png','webp','pdf'],
+    'form_allowed_mime_types' => ['image/jpeg','image/png','image/webp','application/pdf'],
 ];

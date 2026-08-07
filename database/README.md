@@ -2,4 +2,6 @@
 
 Importa `rutadocente.sql` desde phpMyAdmin. El archivo crea tablas, relaciones, catálogos iniciales, un administrador, un docente de demostración y dos recursos de ejemplo.
 
+Si la plataforma ya está instalada, ejecuta únicamente `2026_08_07_public_form.sql`. Esta migración agrega la configuración del formulario público, sus campos, las respuestas y los datos bancarios iniciales del intensivo 2026.
+
 La conexión no se guarda aquí: se configura de forma separada en `config/database.local.php`.

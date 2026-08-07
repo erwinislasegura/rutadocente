@@ -2,7 +2,7 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Database;
-use App\Models\{User,Catalog,Resource};
+use App\Models\{User,Catalog,Resource,PublicForm};
 
 class AdminController extends Controller {
  function dashboard():void{$this->admin();$db=Database::connection();$stats=['usuarios'=>$db->query('SELECT COUNT(*) FROM users')->fetchColumn(),'docentes'=>$db->query("SELECT COUNT(*) FROM users u JOIN roles r ON r.id=u.role_id WHERE r.name='docente'")->fetchColumn(),'tests'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='test'")->fetchColumn(),'tabuladores'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='tabulador'")->fetchColumn()];$this->view('admin/dashboard',['title'=>'Panel de control','stats'=>$stats]);}
@@ -25,4 +25,99 @@ class AdminController extends Controller {
  function resourceView():void{$this->admin();$resource=(new Resource)->findDetailed((int)($_GET['id']??0));if(!$resource){http_response_code(404);exit('Recurso no encontrado');}$this->view('admin/resource-view',['title'=>'Detalle del recurso','resource'=>$resource]);}
  function saveResource():void{$this->admin();verify_csrf();$file=null;if(!empty($_FILES['file']['name'])){$ext=strtolower(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION));if(!in_array($ext,config('allowed_extensions'),true))exit('Tipo de archivo no permitido');if($_FILES['file']['size']>config('max_upload_mb')*1048576)exit('Archivo demasiado grande');$dir=config('upload_dir');if(!is_dir($dir))mkdir($dir,0755,true);$name=bin2hex(random_bytes(12)).'.'.$ext;move_uploaded_file($_FILES['file']['tmp_name'],$dir.'/'.$name);$file=$name;}$_POST['file_path']=$file;(new Resource)->save($_POST,!empty($_POST['id'])?(int)$_POST['id']:null);flash('success','Recurso guardado correctamente.');redirect($_POST['type']==='test'?'/admin/tests':'/admin/tabuladores');}
  function deleteResource():void{$this->admin();verify_csrf();(new Resource)->delete((int)$_POST['id']);flash('success','Recurso eliminado.');redirect(($_POST['type']??'test')==='test'?'/admin/tests':'/admin/tabuladores');}
+
+ function publicForm():void {
+  $this->admin();
+  $form=new PublicForm;
+  $fieldId=(int)($_GET['field']??0);
+  $this->view('admin/public-form',[
+   'title'=>'Formulario público',
+   'settings'=>$form->settings(),
+   'fields'=>$form->fields(),
+   'editingField'=>$fieldId?$form->field($fieldId):null,
+   'submissions'=>$form->submissions(),
+  ]);
+ }
+
+ function saveFormInformation():void {
+  $this->admin();verify_csrf();
+  $status=in_array($_POST['status']??'closed',['open','closed'],true)?$_POST['status']:'closed';
+  (new PublicForm)->saveInformation([
+   'eyebrow'=>$this->clean($_POST['eyebrow']??'',80),
+   'title'=>$this->clean($_POST['title']??'',180),
+   'intro'=>$this->clean($_POST['intro']??'',3000),
+   'information_title'=>$this->clean($_POST['information_title']??'',180),
+   'information_body'=>$this->clean($_POST['information_body']??'',6000),
+   'status'=>$status,
+   'submit_label'=>$this->clean($_POST['submit_label']??'',80),
+   'success_title'=>$this->clean($_POST['success_title']??'',180),
+   'success_message'=>$this->clean($_POST['success_message']??'',2000),
+   'consent_text'=>$this->clean($_POST['consent_text']??'',1000),
+  ]);
+  flash('success','Información del formulario actualizada.');redirect('/admin/formulario#informacion');
+ }
+
+ function saveBankAccount():void {
+  $this->admin();verify_csrf();
+  (new PublicForm)->saveBank([
+   'bank_enabled'=>isset($_POST['bank_enabled'])?1:0,
+   'bank_title'=>$this->clean($_POST['bank_title']??'',180),
+   'bank_amount'=>$this->clean($_POST['bank_amount']??'',80),
+   'bank_holder'=>$this->clean($_POST['bank_holder']??'',180),
+   'bank_rut'=>$this->clean($_POST['bank_rut']??'',40),
+   'bank_name'=>$this->clean($_POST['bank_name']??'',120),
+   'bank_account_type'=>$this->clean($_POST['bank_account_type']??'',100),
+   'bank_account_number'=>$this->clean($_POST['bank_account_number']??'',100),
+   'bank_email'=>$this->clean($_POST['bank_email']??'',180),
+   'bank_instructions'=>$this->clean($_POST['bank_instructions']??'',3000),
+  ]);
+  flash('success','Cuenta bancaria actualizada.');redirect('/admin/formulario#cuenta-bancaria');
+ }
+
+ function saveFormField():void {
+  $this->admin();verify_csrf();
+  $types=['text','email','tel','number','date','textarea','select','radio','checkbox','checkbox_group','file'];
+  $type=in_array($_POST['field_type']??'text',$types,true)?$_POST['field_type']:'text';
+  $label=$this->clean($_POST['label']??'',180);
+  if($label===''){flash('error','El nombre del campo es obligatorio.');redirect('/admin/formulario#campos');}
+  $options=array_values(array_filter(array_map(fn($option)=>$this->clean($option,300),preg_split('/\R/',$_POST['options']??'')?:[])));
+  if(in_array($type,['select','radio','checkbox_group'],true)&&!$options){flash('error','Agrega al menos una opción para este tipo de campo.');redirect('/admin/formulario#campos');}
+  (new PublicForm)->saveField([
+   'label'=>$label,'field_type'=>$type,
+   'placeholder'=>$this->clean($_POST['placeholder']??'',180),
+   'help_text'=>$this->clean($_POST['help_text']??'',500),
+   'options'=>$options,'required'=>isset($_POST['required'])?1:0,'active'=>isset($_POST['active'])?1:0,
+   'sort_order'=>max(0,min(999,(int)($_POST['sort_order']??0))),
+   'max_selections'=>max(0,min(20,(int)($_POST['max_selections']??0))),
+  ],!empty($_POST['id'])?(int)$_POST['id']:null);
+  flash('success','Campo guardado correctamente.');redirect('/admin/formulario#campos');
+ }
+
+ function deleteFormField():void {
+  $this->admin();verify_csrf();
+  (new PublicForm)->delete((int)($_POST['id']??0));
+  flash('success','Campo eliminado. Las respuestas históricas se conservaron.');redirect('/admin/formulario#campos');
+ }
+
+ function downloadFormFile():void {
+  $this->admin();
+  $submission=(new PublicForm)->submission((int)($_GET['submission']??0));
+  $fieldId=(int)($_GET['field']??0);
+  $answers=$submission?json_decode($submission['answers_json'],true):null;
+  $file=is_array($answers)?($answers[$fieldId]['value']??null):null;
+  if(!is_array($file)||empty($file['stored'])){http_response_code(404);exit('Archivo no encontrado');}
+  $stored=basename((string)$file['stored']);
+  $path=rtrim(config('form_upload_dir'),'/').'/'.$stored;
+  if(!is_file($path)){http_response_code(404);exit('Archivo no encontrado');}
+  $downloadName=preg_replace('/[^\pL\pN._ -]+/u','_',basename((string)($file['original']??$stored)))?:'comprobante';
+  header('Content-Type: application/octet-stream');
+  header('Content-Length: '.filesize($path));
+  header('Content-Disposition: attachment; filename="'.str_replace('"','',$downloadName).'"');
+  readfile($path);exit;
+ }
+
+ private function clean(mixed $value,int $max):string {
+  $value=trim((string)$value);
+  return function_exists('mb_substr')?mb_substr($value,0,$max):substr($value,0,$max);
+ }
 }

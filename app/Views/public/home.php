@@ -37,6 +37,7 @@
             <a href="<?=url('/correctores-ia')?>">Correctores IA</a>
             <a href="<?=url('/tabuladores')?>">Tabuladores</a>
             <a href="<?=url('/recursos')?>">Recursos</a>
+            <a href="<?=url('/inscripcion')?>">Inscripción</a>
             <a href="<?=url('/contacto')?>">Contacto</a>
             <a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a>
         </nav>
@@ -86,7 +87,7 @@
             </ul>
             <div class="tests-promo-actions">
                 <a href="<?=url('/login')?>">Ver mis tests <span>→</span></a>
-                <small>¿Aún no tienes acceso? <a href="<?=url('/contacto')?>">Solicítalo aquí</a></small>
+                <small>¿Aún no tienes acceso? <a href="<?=url('/inscripcion')?>">Inscríbete aquí</a></small>
             </div>
         </div>
     </section>
@@ -165,6 +166,7 @@
         <div>
             <h3>Ayuda</h3>
             <a href="<?=url('/recursos')?>">Recursos</a>
+            <a href="<?=url('/inscripcion')?>">Inscripción</a>
             <a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a>
             <a href="<?=url('/contacto')?>">Contacto</a>
         </div>
