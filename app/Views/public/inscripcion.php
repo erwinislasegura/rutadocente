@@ -14,7 +14,7 @@
  <div class="container header-inner">
   <a class="brand" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente"><div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div></a>
   <button class="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
-  <nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a class="active" href="<?=url('/inscripcion')?>">Inscripción</a><a href="<?=url('/contacto')?>">Contacto</a></nav>
+  <nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a class="active" href="<?=url('/inscripcion')?>">Inscripción</a><a href="<?=url('/contacto')?>">Contacto</a></nav>
   <a class="pill header-cta" href="<?=url('/login')?>">Acceso docente</a>
  </div>
 </header>

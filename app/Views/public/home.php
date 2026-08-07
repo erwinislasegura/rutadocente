@@ -34,7 +34,7 @@
             <a href="<?=url('/asignaturas')?>">Asignaturas</a>
             <a href="<?=url('/portafolio')?>">Portafolio</a>
             <a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a>
-            <a href="<?=url('/tests')?>">Test</a>
+            <a href="<?=url('/tests')?>">Tus test</a>
             <a href="<?=url('/tabuladores')?>">Tabuladores</a>
             <a href="<?=url('/recursos')?>">Recursos</a>
             <a href="<?=url('/inscripcion')?>">Inscripción</a>
@@ -161,7 +161,7 @@
             <a href="<?=url('/asignaturas')?>">Asignaturas</a>
             <a href="<?=url('/portafolio')?>">Portafolio</a>
             <a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a>
-            <a href="<?=url('/tests')?>">Test</a>
+            <a href="<?=url('/tests')?>">Tus test</a>
         </div>
         <div>
             <h3>Ayuda</h3>

@@ -64,3 +64,42 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
 @media(max-width:1100px){.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:767.98px){.library-hero{grid-template-columns:1fr;min-height:auto;padding:1.5rem}.library-hero-visual{display:none}.library-toolbar{align-items:flex-start;flex-direction:column}.library-search{width:100%}.library-summary{grid-template-columns:1fr 1fr 1fr}.library-grid{grid-template-columns:1fr}.library-card{min-height:285px}.library-locked{align-items:flex-start}}
 @media(max-width:575.98px){.library-hero h2{font-size:1.65rem}.library-summary{grid-template-columns:1fr}.library-card-footer{align-items:flex-start;flex-direction:column}.library-actions{width:100%;justify-content:flex-start}.library-actions .btn{flex:1}.library-locked{flex-direction:column}.resource-group-heading{align-items:flex-start}.resource-group-heading>span{display:none}}
+
+/* Revisión visual global del panel */
+.app-body{background:#f4f7fb}
+.sidebar{background:var(--ink);box-shadow:8px 0 30px rgba(3,30,76,.12)}
+.workspace{background:#f4f7fb}
+.app-header{border-bottom:1px solid #e2e8ef;background:rgba(255,255,255,.97);box-shadow:0 6px 22px rgba(3,30,76,.035)}
+.content{max-width:1360px}
+.content h2{line-height:1.2}
+.panel-card,.teacher-module,.analytics-card,.operations-card,.users-table-card{border-color:#dfe5eb;box-shadow:0 7px 24px rgba(3,30,76,.045)}
+.form-control,.form-select{border-color:#d5dee7;background:#fff}
+.form-control:hover,.form-select:hover{border-color:#b9c9d9}
+.table thead th{background:#f3f6fa;color:#566b78}
+.table tbody tr{border-color:#e9edf1}
+.teacher-hero,.admin-intro{border-color:#dbe4ed;border-left:4px solid var(--yellow);background:#fff;box-shadow:0 7px 24px rgba(3,30,76,.045)}
+.teacher-overview>div,.kpi-card,.library-toolbar,.library-summary>div,.library-card{border-color:#dfe5eb}
+.teacher-module,.library-toolbar,.library-summary>div,.library-card,.resource-group-heading{background:#fff}
+.library-hero,.tabulator-hero{border-top:4px solid var(--yellow);background:var(--ink);box-shadow:0 12px 32px rgba(3,30,76,.13)}
+.library-hero h2{letter-spacing:-.035em}
+.library-card{border-radius:.8rem;box-shadow:0 5px 18px rgba(3,30,76,.035)}
+.library-card:hover{border-color:#b5c9df;box-shadow:0 12px 28px rgba(3,30,76,.075)}
+.profile-summary{background:var(--ink)}
+.welcome-card{background:var(--blue)}
+.danger-zone{background:#fff;border-color:#ebcfd4}
+.empty-state,.library-empty{background:#fff}
+.btn-brand{box-shadow:0 7px 18px rgba(7,82,163,.16)}
+.sidebar .sidebar-nav .nav-link.active{background:rgba(7,82,163,.35)}
+
+@media(max-width:767.98px){
+ .content{padding-top:1.35rem}
+ .library-hero{padding:1.35rem;border-radius:.85rem}
+ .library-toolbar{padding:.9rem}
+ .library-card{min-height:270px}
+}
+@media(max-width:575.98px){
+ .app-header{min-height:70px}
+ .content{padding-bottom:2.5rem}
+ .teacher-hero,.admin-intro{border-left-width:3px}
+ .panel-card>.card-body{padding:1.2rem!important}
+}
