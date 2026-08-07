@@ -8,7 +8,7 @@ class PublicController extends Controller {
  function asignaturas():void{$this->publicPage('asignaturas');}
  function portafolio():void{$this->publicPage('portafolio');}
  function clasesAsincronicas():void{$this->publicPage('clases-asincronicas');}
- function correctoresIa():void{$this->publicPage('correctores-ia');}
+ function tests():void{$this->publicPage('tests');}
  function tabuladores():void{$this->publicPage('tabuladores');}
  function recursos():void{$this->publicPage('recursos');}
  function contacto():void{$this->publicPage('contacto');}

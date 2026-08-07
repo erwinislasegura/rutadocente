@@ -34,7 +34,7 @@
             <a href="<?=url('/asignaturas')?>">Asignaturas</a>
             <a href="<?=url('/portafolio')?>">Portafolio</a>
             <a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a>
-            <a href="<?=url('/correctores-ia')?>">Correctores IA</a>
+            <a href="<?=url('/tests')?>">Test</a>
             <a href="<?=url('/tabuladores')?>">Tabuladores</a>
             <a href="<?=url('/recursos')?>">Recursos</a>
             <a href="<?=url('/inscripcion')?>">Inscripción</a>
@@ -97,7 +97,7 @@
             <div class="intro">
                 <span class="eyebrow">UNA RUTA COMPLETA</span>
                 <h2>Todo lo que necesitas para crecer profesionalmente.</h2>
-                <p>Ruta Docente reúne recursos para Educación Parvularia, Matemática, Historia, Inglés, Portafolio Docente, clases asincrónicas, tabulación de resultados y corrección asistida por inteligencia artificial.</p>
+                <p>Ruta Docente reúne recursos para Educación Parvularia, Matemática, Historia, Inglés, Portafolio Docente, clases asincrónicas, tabulación de resultados y tests organizados por asignatura.</p>
             </div>
             <div class="cards">
                 <article class="card">
@@ -113,10 +113,10 @@
                     <a class="static-card-link" href="<?=url('/contacto')?>">Conocer más →</a>
                 </article>
                 <article class="card">
-                    <span class="icon">✦</span>
-                    <h3>Correctores con IA</h3>
-                    <p>Retroalimentación ágil para mejorar textos, planificación y evidencias.</p>
-                    <a class="static-card-link" href="<?=url('/contacto')?>">Conocer más →</a>
+                    <span class="icon">✓</span>
+                    <h3>Tests docentes</h3>
+                    <p>Evaluaciones para practicar, reconocer avances y fortalecer tu preparación.</p>
+                    <a class="static-card-link" href="<?=url('/tests')?>">Explorar tests →</a>
                 </article>
                 <article class="card">
                     <span class="icon">▦</span>
@@ -161,7 +161,7 @@
             <a href="<?=url('/asignaturas')?>">Asignaturas</a>
             <a href="<?=url('/portafolio')?>">Portafolio</a>
             <a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a>
-            <a href="<?=url('/correctores-ia')?>">Correctores IA</a>
+            <a href="<?=url('/tests')?>">Test</a>
         </div>
         <div>
             <h3>Ayuda</h3>
