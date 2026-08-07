@@ -308,3 +308,23 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
  .donut-content{align-items:flex-start;flex-direction:column}
  .donut-chart{align-self:center}
 }
+
+/* Accesos a manuales de cada panel */
+.panel-manual-link{display:flex!important;align-items:center;gap:.65rem;margin-top:.85rem;padding:.68rem .78rem;border:1px solid #bfd3ec;border-radius:.75rem;color:#073e7c!important;background:#f5f9fe;transition:.18s ease}
+.panel-manual-link:hover{border-color:#0b5fbd;background:#eaf3fb;transform:translateY(-1px)}
+.panel-manual-link>span:first-child{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:.55rem;color:#052f63;background:#ffd36a;font-size:1rem;font-weight:900}
+.panel-manual-link b,.panel-manual-link small{display:block}
+.panel-manual-link b{font-size:.78rem;line-height:1.2}
+.panel-manual-link small{margin-top:.14rem;color:#607b92;font-size:.65rem;font-weight:600}
+.executive-actions{display:flex;align-items:flex-end;flex-direction:column;gap:.55rem}
+.executive-actions>div{display:flex;gap:.55rem}
+.btn-manual{gap:.45rem;border:1px solid #b9cfe4;color:#0752a3;background:#fff;font-weight:800}
+.btn-manual:hover{border-color:#0b5fbd;color:#fff;background:#0b5fbd}
+.btn-manual span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:.4rem;color:#052f63;background:#ffd36a}
+
+@media(max-width:767.98px){
+ .executive-actions{align-items:stretch;width:100%}
+ .executive-actions>div{display:grid;grid-template-columns:1fr;gap:.55rem}
+ .executive-actions .btn{width:100%}
+ .panel-manual-link{max-width:280px}
+}
