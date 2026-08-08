@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Recursos y acompañamiento para docentes de Chile">
     <title>Inicio | Ruta Docente 2026</title>
-    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260808-legibilidad1')?>">
+    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260808-sello1')?>">
     <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body>
@@ -64,6 +64,10 @@
             </div>
             <div class="hero-visual">
                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=85" alt="Docente guiando a estudiantes">
+                <aside class="hero-quality-seal" aria-label="Un proyecto más de Aula Entretenida">
+                    <span>UN PROYECTO MÁS DE</span>
+                    <img src="<?=url('/assets/img/aula-entretenida-sello.webp')?>" alt="Sello de calidad Aula Entretenida" width="480" height="480">
+                </aside>
                 <div class="float-card">
                     <span>✓</span>
                     <div><b>Aprende a tu ritmo</b><small>Material claro y actualizado</small></div>

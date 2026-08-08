@@ -532,3 +532,19 @@ nav a{font-size:13px}
  .copyright{font-size:13px}
 }
 @media(max-width:480px){.trust span{font-size:10px}}
+
+/* Sello de calidad Aula Entretenida en el hero */
+.hero-quality-seal{position:absolute;z-index:4;right:-6px;top:18px;width:164px;margin:0;text-align:center;transform:rotate(2deg);filter:drop-shadow(0 14px 24px rgba(3,30,76,.2))}
+.hero-quality-seal span{display:inline-block;position:relative;z-index:2;margin-bottom:-8px;padding:7px 11px;border-radius:99px;color:#fff;background:var(--ink);box-shadow:0 5px 14px rgba(3,30,76,.18);font-size:10px;font-weight:900;line-height:1;letter-spacing:.1em;white-space:nowrap}
+.hero-quality-seal img{display:block;width:100%;height:auto;aspect-ratio:1;border:5px solid #fff;border-radius:50%;background:#fff;object-fit:cover;clip-path:circle(50%);box-shadow:0 0 0 3px rgba(218,150,12,.75)}
+
+@media(max-width:780px){
+ .hero-quality-seal{right:2px;top:8px;width:126px}
+ .hero-quality-seal span{padding:6px 8px;font-size:8px}
+ .hero-quality-seal img{border-width:4px}
+}
+
+@media(max-width:420px){
+ .hero-quality-seal{right:0;top:5px;width:108px}
+ .hero-quality-seal span{font-size:7px;letter-spacing:.07em}
+}
