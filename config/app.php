@@ -4,6 +4,7 @@ $detectedBaseUrl = preg_replace('#/(?:public/)?index\.php$#', '', $scriptName) ?
 
 return [
     'name' => 'Ruta Docente',
+    'site_url' => rtrim((string) (getenv('APP_URL') ?: 'https://rutadocente.com'), '/'),
     // Detecta automáticamente instalaciones como /rutadocente y también
     // funciona cuando el dominio apunta directamente a la carpeta public.
     'base_url' => rtrim((string) (getenv('APP_BASE_URL') ?: $detectedBaseUrl), '/'),

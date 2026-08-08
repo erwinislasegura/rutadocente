@@ -14,6 +14,19 @@ class PublicController extends Controller {
  function contacto():void{$this->publicPage('contacto');}
  function preguntasFrecuentes():void{$this->publicPage('preguntas-frecuentes');}
 
+ function sitemap():void {
+  $pages=['/'=>['1.0','weekly'],'/portafolio'=>['0.9','weekly'],'/recursos'=>['0.9','weekly'],'/tests'=>['0.8','weekly'],'/tabuladores'=>['0.8','weekly'],'/clases-asincronicas'=>['0.8','weekly'],'/asignaturas'=>['0.8','weekly'],'/inscripcion'=>['0.7','weekly'],'/preguntas-frecuentes'=>['0.6','monthly'],'/contacto'=>['0.6','monthly']];
+  header('Content-Type: application/xml; charset=UTF-8');
+  echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+  foreach($pages as $path=>$meta)echo ' <url><loc>'.e(absolute_url($path)).'</loc><lastmod>2026-08-08</lastmod><changefreq>'.$meta[1].'</changefreq><priority>'.$meta[0].'</priority></url>' . "\n";
+  echo '</urlset>';
+ }
+
+ function robots():void {
+  header('Content-Type: text/plain; charset=UTF-8');
+  echo "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /docente/\nDisallow: /storage/\nSitemap: ".absolute_url('/sitemap.xml')."\n";
+ }
+
  function registration():void {
   $form=new PublicForm;
   $errors=$_SESSION['_public_form_errors']??[];

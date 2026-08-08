@@ -14,6 +14,7 @@ $r->get('/tabuladores',[PublicController::class,'tabuladores']);
 $r->get('/recursos',[PublicController::class,'recursos']);
 $r->get('/contacto',[PublicController::class,'contacto']);
 $r->get('/preguntas-frecuentes',[PublicController::class,'preguntasFrecuentes']);
+$r->get('/sitemap.xml',[PublicController::class,'sitemap']); $r->get('/robots.txt',[PublicController::class,'robots']);
 $r->get('/inscripcion',[PublicController::class,'registration']); $r->post('/inscripcion',[PublicController::class,'submitRegistration']);
 $r->get('/login',[AuthController::class,'show']); $r->post('/login',[AuthController::class,'login']); $r->post('/logout',[AuthController::class,'logout']);
 $r->get('/admin',[AdminController::class,'dashboard']);
