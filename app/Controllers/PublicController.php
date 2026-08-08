@@ -22,7 +22,7 @@ class PublicController extends Controller {
   unset($_SESSION['_public_form_errors'],$_SESSION['_public_form_old'],$_SESSION['_public_form_success']);
   $settings=$form->settings();
   $fields=$form->fields(true);
-  require dirname(__DIR__).'/Views/public/inscripcion.php';
+  $this->publicPage('inscripcion',compact('form','errors','old','success','settings','fields'));
  }
 
  function submitRegistration():void {

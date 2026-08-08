@@ -35,3 +35,18 @@ document.querySelectorAll('[data-resource-search]').forEach(input => input.addEv
   });
   document.querySelector('[data-resource-empty]')?.classList.toggle('d-none', visible !== 0);
 }));
+
+// La plantilla del panel es compartida: agrega la integración solo al menú administrador.
+const catalogsLink = document.querySelector('.sidebar-nav a[href$="/admin/catalogos"]');
+if (catalogsLink && !document.querySelector('.sidebar-nav a[href$="/admin/analytics"]')) {
+  const integrationLabel = document.createElement('span');
+  integrationLabel.className = 'sidebar-label inner';
+  integrationLabel.textContent = 'INTEGRACIONES';
+  const divider = document.createElement('div');
+  divider.className = 'sidebar-divider';
+  const analyticsLink = document.createElement('a');
+  analyticsLink.className = `nav-link${location.pathname.endsWith('/admin/analytics') ? ' active' : ''}`;
+  analyticsLink.href = catalogsLink.href.replace(/\/admin\/catalogos$/, '/admin/analytics');
+  analyticsLink.innerHTML = '<span class="nav-icon">A</span><span>Google Analytics</span>';
+  catalogsLink.after(divider, integrationLabel, analyticsLink);
+}
