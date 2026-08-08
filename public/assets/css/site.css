@@ -483,3 +483,52 @@ footer:before{content:"";position:absolute;right:-100px;top:-150px;width:320px;h
  .activaweb-logo img{max-height:62px}
  .activaweb-link{grid-column:auto;width:100%}
 }
+
+/* Legibilidad general: tamaños mínimos cómodos sin alterar la jerarquía visual */
+body{font-size:16px;line-height:1.55}
+.topbar{font-size:13px}
+.brand small{font-size:11px;line-height:1.35}
+nav a{font-size:13px}
+.pill{font-size:13px}
+.eyebrow{font-size:12px;line-height:1.4}
+.btn,.text-link{font-size:14px}
+.trust span{font-size:11px;line-height:1.35}
+.float-card small{font-size:12px}
+.float-note{font-size:12px}
+.strip{font-size:12px}
+.card p,.step-grid p,.notice p,.accordion article p{font-size:15px}
+.card>a,.static-card-link,.notice a{font-size:14px}
+.card small,.downloads small{font-size:11px}
+.crumb{font-size:13px}
+.chart-top span,.chart-labels,.downloads span{font-size:12px}
+.filters button{font-size:13px}
+.contact-info small{font-size:12px}
+.hours span{font-size:14px}
+.form label{font-size:14px}
+.form input,.form textarea,.form select{font-size:16px}
+.footer-grid>div:first-child>p{font-size:14px}
+.footer-grid>div:not(:first-child)>a{font-size:14px;line-height:1.45}
+.copyright{font-size:12px;line-height:1.45}
+.route-note{font-size:14px}
+.tests-promo-copy>span{font-size:11px}
+.tests-promo-copy p{font-size:14px}
+.tests-promo-features li{font-size:12px}
+.tests-promo-actions>a{font-size:13px}
+.tests-promo-actions small{font-size:12px}
+.mobile-teacher-brand small{font-size:10px}
+.mobile-teacher-bar>a{font-size:13px}
+.registration-form-heading p,.registration-privacy,.field-help,.field-error{font-size:14px}
+.registration-field legend,.registration-consent{font-size:15px}
+.registration-field input,.registration-field textarea,.registration-field select{font-size:16px}
+
+@media(max-width:1050px){nav a{font-size:12px}}
+@media(max-width:780px){
+ nav a{font-size:16px;line-height:1.4}
+ .brand strong{font-size:19px}
+ .brand small{font-size:10px}
+ .hero-copy>p,.page-hero p{font-size:17px}
+ .card p,.step-grid p,.notice p,.accordion article p{font-size:16px}
+ .footer-grid>div:not(:first-child)>a{font-size:15px}
+ .copyright{font-size:13px}
+}
+@media(max-width:480px){.trust span{font-size:10px}}

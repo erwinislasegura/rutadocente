@@ -316,6 +316,52 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
 .panel-manual-link b,.panel-manual-link small{display:block}
 .panel-manual-link b{font-size:.78rem;line-height:1.2}
 .panel-manual-link small{margin-top:.14rem;color:#607b92;font-size:.65rem;font-weight:600}
+
+/* Legibilidad del panel: eleva textos auxiliares y controles demasiado pequeños */
+.app-body{font-size:1rem;line-height:1.5}
+.app-body small{font-size:.78rem}
+.app-header small,.sidebar-label,.sidebar-label.inner{font-size:.72rem}
+.sidebar .sidebar-nav .nav-link>span:last-child{font-size:.9rem}
+.eyebrow,.analytics-kicker{font-size:.7rem}
+.dashboard-date{font-size:.72rem}
+.kpi-card h3{font-size:.9rem}
+.kpi-card p{font-size:.78rem}
+.analytics-card header a,.analytics-total{font-size:.78rem}
+.donut-chart span,.chart-legend p,.metric-label{font-size:.8rem}
+.chart-legend small,.horizontal-metrics small{font-size:.74rem}
+.resource-efficiency span,.resource-efficiency p,.operations-card>header>span{font-size:.76rem}
+.operations-grid strong{font-size:.82rem}
+.operations-grid small{font-size:.74rem}
+.form-section-nav a{font-size:.86rem}
+.config-heading p{font-size:.88rem}
+.status-chip{font-size:.78rem}
+.field-row b{font-size:.88rem}
+.field-row small{font-size:.76rem}
+.field-editor-checks label{font-size:.86rem}
+.submission-card summary b{font-size:.9rem}
+.submission-card summary small,.submission-open,.submission-answers small{font-size:.76rem}
+.submission-answers b,.submission-answers a{font-size:.86rem}
+.library-hero p{font-size:1rem}
+.library-hero-meta span{font-size:.76rem}
+.library-toolbar p,.library-search input{font-size:.86rem}
+.library-summary small{font-size:.76rem}
+.card-number,.card-status{font-size:.72rem}
+.library-card>p{font-size:.86rem}
+.library-card-footer small{font-size:.68rem}
+.library-card-footer span{font-size:.74rem}
+.library-actions .btn{font-size:.76rem}
+.resource-group-heading small,.resource-group-heading>span{font-size:.7rem}
+.form-label{font-size:.88rem}
+.form-control,.form-select,.btn{font-size:.92rem}
+
+@media(max-width:767.98px){
+ .app-body{font-size:1rem}
+ .sidebar .sidebar-nav .nav-link{min-height:48px}
+ .sidebar .sidebar-nav .nav-link>span:last-child{font-size:.96rem}
+ .app-header h1{font-size:1.2rem}
+ .field-row b,.submission-card summary b{font-size:.94rem}
+ .field-row small,.submission-card summary small{font-size:.8rem}
+}
 .executive-actions{display:flex;align-items:flex-end;flex-direction:column;gap:.55rem}
 .executive-actions>div{display:flex;gap:.55rem}
 .btn-manual{gap:.45rem;border:1px solid #b9cfe4;color:#0752a3;background:#fff;font-weight:800}
