@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 use App\Models\SiteSetting;
+use App\Models\User;
 class Controller {
  protected function view(string $view,array $data=[]):void{
   extract($data);$viewFile=dirname(__DIR__).'/Views/'.$view.'.php';
@@ -59,5 +60,16 @@ class Controller {
   return preg_replace('/<\/head>/i',$tags.'</head>',$html,1)??$html;
  }
  protected function admin():array{if(empty($_SESSION['user'])||$_SESSION['user']['role']!=='administrador')redirect('/login');return $_SESSION['user'];}
- protected function teacher():array{if(empty($_SESSION['user'])||$_SESSION['user']['role']!=='docente')redirect('/login');return $_SESSION['user'];}
+ protected function teacher():array{
+  if(empty($_SESSION['user'])||$_SESSION['user']['role']!=='docente')redirect('/login');
+  $user=(new User)->findDetailed((int)$_SESSION['user']['id']);
+  if(!$user||$user['role']!=='docente'||empty($user['active'])){
+   unset($_SESSION['user']);
+   flash('error','Tu cuenta ya no tiene acceso al panel docente.');
+   redirect('/login');
+  }
+  unset($user['password']);
+  $_SESSION['user']=$user;
+  return $user;
+ }
 }
