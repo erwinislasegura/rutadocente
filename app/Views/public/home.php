@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Recursos y acompañamiento para docentes de Chile">
     <title>Inicio | Ruta Docente 2026</title>
-    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260808-sello1')?>">
+    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260809-whatsapp1')?>">
     <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body>

@@ -548,3 +548,9 @@ nav a{font-size:13px}
  .hero-quality-seal{right:0;top:5px;width:108px}
  .hero-quality-seal span{font-size:7px;letter-spacing:.07em}
 }
+
+/* Ícono oficial de WhatsApp en el botón flotante */
+.whatsapp{font-size:0}
+.whatsapp::before{content:"";display:block;width:29px;height:32px;background:#fff;-webkit-mask:url('../img/whatsapp.svg') center/contain no-repeat;mask:url('../img/whatsapp.svg') center/contain no-repeat}
+
+@media(max-width:780px){.whatsapp::before{width:26px;height:29px}}
