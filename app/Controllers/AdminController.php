@@ -10,7 +10,19 @@ class AdminController extends Controller {
  function users():void{$this->admin();$this->view('admin/users',['title'=>'Usuarios y docentes','users'=>(new User)->detailed()]);}
  function userForm():void{$this->admin();$id=(int)($_GET['id']??0);$this->view('admin/user-form',['title'=>$id?'Editar usuario':'Nuevo usuario','user'=>$id?(new User)->findDetailed($id):null,'roles'=>(new Catalog('roles'))->all(),'subjects'=>(new Catalog('subjects'))->all()]);}
  function userView():void{$this->admin();$user=(new User)->findDetailed((int)($_GET['id']??0));if(!$user){http_response_code(404);exit('Usuario no encontrado');}$this->view('admin/user-view',['title'=>'Detalle del usuario','user'=>$user]);}
- function saveUser():void{$this->admin();verify_csrf();(new User)->save($_POST,!empty($_POST['id'])?(int)$_POST['id']:null);flash('success','Usuario guardado correctamente.');redirect('/admin/usuarios');}
+ function saveUser():void {
+  $this->admin();verify_csrf();$id=!empty($_POST['id'])?(int)$_POST['id']:null;
+  try{
+   (new User)->save($_POST,$id);
+   flash('success','Usuario guardado correctamente.');redirect('/admin/usuarios');
+  }catch(\InvalidArgumentException $error){
+   flash('error',$error->getMessage());redirect('/admin/usuarios/formulario'.($id?'?id='.$id:''));
+  }catch(\PDOException $error){
+   $duplicate=(int)($error->errorInfo[1]??0)===1062;
+   flash('error',$duplicate?'Ya existe un usuario registrado con ese correo electrónico.':'No fue posible guardar el usuario. Revisa los datos e inténtalo nuevamente.');
+   redirect('/admin/usuarios/formulario'.($id?'?id='.$id:''));
+  }
+ }
  function deleteUser():void{$this->admin();verify_csrf();(new User)->delete((int)$_POST['id']);flash('success','Usuario eliminado.');redirect('/admin/usuarios');}
 
  function catalogs():void{$this->admin();$this->view('admin/catalogs',['title'=>'Catálogos del sistema','roles'=>(new Catalog('roles'))->all(),'subjects'=>(new Catalog('subjects'))->all(),'groups'=>(new Catalog('tabulator_groups'))->all(),'subgroups'=>(new Catalog('tabulator_subgroups'))->all()]);}
