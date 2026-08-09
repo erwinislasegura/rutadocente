@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Recursos y acompañamiento para docentes de Chile">
     <title>Inicio | Ruta Docente 2026</title>
-    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260809-whatsapp1')?>">
+    <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260810-accesshub1')?>">
     <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body>
@@ -76,22 +76,28 @@
         </div>
     </section>
 
-    <section class="tests-promo" aria-labelledby="tests-promo-title">
-        <div class="container tests-promo-inner">
-            <div class="tests-promo-icon" aria-hidden="true">✓</div>
-            <div class="tests-promo-copy">
-                <span>TESTS RUTA DOCENTE</span>
-                <h2 id="tests-promo-title">Practica y fortalece tu preparación docente.</h2>
-                <p>Accede a evaluaciones y actividades organizadas según tu asignatura desde tu espacio personal.</p>
+    <section class="access-hub" aria-labelledby="access-hub-title">
+        <div class="container">
+            <div class="access-hub-heading">
+                <div><span>ACCESOS RUTA DOCENTE</span><h2 id="access-hub-title">Elige cómo quieres avanzar.</h2></div>
+                <p>Ingresa a tus herramientas personales o reserva tu cupo en nuestros talleres.</p>
             </div>
-            <ul class="tests-promo-features" aria-label="Características de los tests">
-                <li>Por asignatura</li>
-                <li>Acceso personalizado</li>
-                <li>Disponibles 24/7</li>
-            </ul>
-            <div class="tests-promo-actions">
-                <a href="<?=url('/login')?>">Ver mis tests <span>→</span></a>
-                <small>¿Aún no tienes acceso? <a href="<?=url('/inscripcion')?>">Inscríbete aquí</a></small>
+            <div class="access-hub-grid">
+                <article class="access-card access-card-tests">
+                    <span class="access-card-icon" aria-hidden="true">✓</span>
+                    <div><small>EVALUACIÓN Y PRÁCTICA</small><h3>Tests por asignatura</h3><p>Practica con evaluaciones organizadas para tu área y revisa tus recursos disponibles.</p></div>
+                    <a href="<?=url('/login')?>">Acceder a mis tests <span>→</span></a>
+                </article>
+                <article class="access-card access-card-tabs">
+                    <span class="access-card-icon" aria-hidden="true">▦</span>
+                    <div><small>ANÁLISIS PEDAGÓGICO</small><h3>Tabuladores</h3><p>Descarga plantillas o utiliza herramientas en línea para analizar tus resultados.</p></div>
+                    <a href="<?=url('/login')?>">Abrir mis tabuladores <span>→</span></a>
+                </article>
+                <article class="access-card access-card-workshops">
+                    <span class="access-card-icon" aria-hidden="true">★</span>
+                    <div><small>FORMACIÓN DOCENTE</small><h3>Comprar talleres</h3><p>Conoce los talleres disponibles, revisa sus detalles y completa tu inscripción.</p></div>
+                    <a href="<?=url('/inscripcion')?>">Ver talleres e inscribirme <span>→</span></a>
+                </article>
             </div>
         </div>
     </section>

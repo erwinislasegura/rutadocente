@@ -554,3 +554,60 @@ nav a{font-size:13px}
 .whatsapp::before{content:"";display:block;width:29px;height:32px;background:#fff;-webkit-mask:url('../img/whatsapp.svg') center/contain no-repeat;mask:url('../img/whatsapp.svg') center/contain no-repeat}
 
 @media(max-width:780px){.whatsapp::before{width:26px;height:29px}}
+
+/* Accesos principales bajo el hero */
+.access-hub{position:relative;overflow:hidden;padding:38px 0 42px;border-top:4px solid var(--yellow);background:linear-gradient(125deg,#0752a3 0%,#0b63bc 62%,#0752a3 100%)}
+.access-hub:after{content:"";position:absolute;right:-115px;top:-210px;width:430px;height:430px;border:66px solid rgba(255,255,255,.055);border-radius:50%;pointer-events:none}
+.access-hub>.container{position:relative;z-index:1}
+.access-hub-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;margin-bottom:22px;color:#fff}
+.access-hub-heading>div>span{display:block;margin-bottom:7px;color:#ffe09a;font-size:10px;font-weight:900;letter-spacing:.18em}
+.access-hub-heading h2{margin:0;color:#fff;font-size:30px;line-height:1.08}
+.access-hub-heading>p{max-width:480px;margin:0;color:#d7e7f7;font-size:14px;line-height:1.55;text-align:right}
+.access-hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.access-card{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;min-width:0;min-height:220px;padding:22px;border:1px solid rgba(255,255,255,.18);border-radius:14px;color:#fff;background:rgba(3,30,76,.32);box-shadow:0 13px 30px rgba(3,30,76,.16);backdrop-filter:blur(7px);transition:.2s ease}
+.access-card:hover{border-color:rgba(255,255,255,.36);background:rgba(3,30,76,.43);transform:translateY(-3px)}
+.access-card-icon{display:grid;place-items:center;width:46px;height:46px;flex:0 0 46px;border-radius:12px;color:var(--ink);background:#fff;font-size:19px;font-weight:900}
+.access-card-tests .access-card-icon{background:var(--yellow)}
+.access-card-tabs .access-card-icon{color:#0752a3;background:#e8f2ff}
+.access-card-workshops .access-card-icon{color:#715000;background:#ffe28f}
+.access-card small{display:block;margin:2px 0 6px;color:#bcd6ef;font-size:9px;font-weight:900;letter-spacing:.13em}
+.access-card h3{margin:0 0 7px;color:#fff;font:700 21px/1.16 Georgia,serif}
+.access-card p{margin:0;color:#d6e5f2;font-size:13px;line-height:1.55}
+.access-card>a{grid-column:1/-1;align-self:end;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;margin-top:7px;padding:0 15px;border-radius:8px;color:var(--ink);background:#fff;font-size:13px;font-weight:900;transition:.18s}
+.access-card>a:hover{color:var(--ink);background:#fff4d6;transform:translateY(-1px)}
+.access-card-workshops>a{background:var(--yellow)}
+
+@media(max-width:900px){
+ .access-hub-grid{grid-template-columns:1fr 1fr}
+ .access-card-workshops{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr) auto;min-height:auto}
+ .access-card-workshops>a{grid-column:3;align-self:center;min-width:220px;margin:0}
+}
+
+@media(max-width:780px){
+ .access-hub{padding:31px 0 35px}
+ .access-hub-heading{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:18px}
+ .access-hub-heading h2{font-size:26px}
+ .access-hub-heading>p{text-align:left}
+ .access-hub-grid{grid-template-columns:1fr;gap:11px}
+ .access-card,.access-card-workshops{grid-column:auto;grid-template-columns:auto minmax(0,1fr);min-height:auto;padding:18px}
+ .access-card-workshops>a,.access-card>a{grid-column:1/-1;width:100%;min-width:0;margin-top:4px}
+ .access-card p{font-size:14px}
+ .footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}
+ .footer-grid>div:first-child{grid-column:1/-1}
+ .footer-grid>div:last-child{grid-column:1/-1;padding-top:4px;border-top:1px solid rgba(255,255,255,.1)}
+ .footer-grid>div:last-child>a{display:inline-block;margin:9px 18px 4px 0}
+ footer .brand{max-width:100%}
+ footer .brand img{width:170px;height:78px}
+ .copyright{padding-bottom:98px}
+ nav a{min-height:45px}
+}
+
+@media(max-width:420px){
+ .access-hub-heading h2{font-size:24px}
+ .access-card{grid-template-columns:40px minmax(0,1fr);padding:16px}
+ .access-card-icon{width:40px;height:40px}
+ .access-card h3{font-size:19px}
+ .footer-grid{gap:26px 16px}
+ .footer-grid h3{font-size:16px}
+ .footer-grid>div:not(:first-child)>a{font-size:14px}
+}

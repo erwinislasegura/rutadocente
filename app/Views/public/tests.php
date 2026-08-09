@@ -5,12 +5,12 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="Tests y evaluaciones para fortalecer la preparación docente 2026">
  <title>Tus test | Ruta Docente 2026</title>
- <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260809-whatsapp1')?>">
+ <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260810-accesshub1')?>">
  <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body class="tests-public-page">
 <div class="topbar"><div class="container"><span>Apoyo docente para todo Chile</span><div><a href="mailto:aulaentretenida0@gmail.com">✉ aulaentretenida0@gmail.com</a><a href="tel:+56975778434">☎ +56 9 7577 8434</a></div></div></div>
-<header><div class="container header-inner"><a class="brand" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente"><div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div></a><button class="menu" aria-label="Abrir menú" aria-expanded="false">☰</button><nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a class="active" href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a href="<?=url('/contacto')?>">Contacto</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a></nav><a class="pill header-cta" href="<?=url('/login')?>">Acceso docente</a></div></header>
+<header><div class="container header-inner"><a class="brand" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente"><div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div></a><button class="menu" aria-label="Abrir menú" aria-expanded="false">☰</button><nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a class="active" href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a href="<?=url('/inscripcion')?>">Inscripción</a><a href="<?=url('/contacto')?>">Contacto</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a></nav><a class="pill header-cta" href="<?=url('/login')?>">Acceso docente</a></div></header>
 
 <main>
  <section class="static-hero tests-static-hero">
