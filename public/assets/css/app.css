@@ -390,3 +390,41 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
  .public-form-admin .form-section-nav{display:grid;grid-template-columns:1fr 1fr;overflow:visible}
  .public-form-admin .form-section-nav>a{min-width:0;white-space:normal}
 }
+
+/* Listado compacto de tests y tabuladores */
+.admin-resource-list{overflow:hidden;border:1px solid #dfe4e7;border-radius:.8rem;background:#fff;box-shadow:0 4px 15px rgba(3,30,76,.035)}
+.admin-resource-list-head,.admin-resource-list-row{display:grid;grid-template-columns:minmax(300px,1fr) 230px 90px 190px;align-items:center;gap:.8rem}
+.admin-resource-list-head{min-height:38px;padding:.45rem .85rem;color:#7a8990;background:#f4f7f8;font-size:.66rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.admin-resource-list-row{min-height:82px;padding:.65rem .85rem;border-top:1px solid #e8ecee;transition:.16s}
+.admin-resource-list-row:hover{background:#f9fbfd}
+.admin-resource-list-row.is-inactive{background:#fbfbfa}
+.admin-resource-list-row .admin-resource-main{gap:.6rem}
+.admin-resource-list-row .admin-resource-symbol{width:36px;height:36px;border-radius:.55rem;font-size:.75rem}
+.admin-resource-list-row .admin-resource-main h3{font-size:.88rem}
+.admin-resource-list-row .resource-meta{font-size:.58rem}
+.admin-resource-list-row .admin-resource-description{display:block;overflow:hidden;min-height:0;margin:.15rem 0 0;text-overflow:ellipsis;white-space:nowrap;font-size:.68rem}
+.admin-resource-list-row .admin-resource-taxonomy{margin:.25rem 0 0}
+.admin-resource-list-row .admin-resource-taxonomy span{padding:.16rem .32rem;font-size:.56rem}
+.admin-resource-list-row .admin-resource-formats{margin:0;padding:0;border:0}
+.admin-resource-list-row .admin-resource-status{justify-self:start}
+.admin-resource-list-row .admin-resource-actions{justify-content:flex-end;margin:0}
+.admin-resource-list-row .admin-resource-actions a,.admin-resource-list-row .admin-resource-actions button{min-height:32px;padding:.3rem .45rem}
+
+@media(max-width:1100px){
+ .admin-resource-list-head,.admin-resource-list-row{grid-template-columns:minmax(260px,1fr) 190px 85px 160px;gap:.55rem}
+}
+@media(max-width:767.98px){
+ .admin-resource-list{overflow:visible;border:0;background:transparent;box-shadow:none}
+ .admin-resource-list-head{display:none}
+ .admin-resource-list-row{grid-template-columns:minmax(0,1fr) auto;gap:.55rem;min-height:0;margin-bottom:.5rem;padding:.75rem;border:1px solid #dfe4e7;border-radius:.7rem;background:#fff}
+ .admin-resource-list-row .admin-resource-main{grid-column:1/-1}
+ .admin-resource-list-row .admin-resource-formats{grid-column:1/-1}
+ .admin-resource-list-row .admin-resource-status{grid-column:1}
+ .admin-resource-list-row .admin-resource-actions{grid-column:2}
+ .admin-resource-list-row .admin-resource-description{white-space:normal}
+}
+@media(max-width:480px){
+ .admin-resource-list-row .admin-resource-actions{display:flex;grid-template-columns:none}
+ .admin-resource-list-row .admin-resource-actions form{grid-column:auto}
+ .admin-resource-list-row .admin-resource-actions a,.admin-resource-list-row .admin-resource-actions button{width:auto;background:#f4f6f6}
+}

@@ -28,21 +28,17 @@ $linkCount=count(array_filter($resources,fn($resource)=>!empty($resource['extern
  <?php if(!$resources):?>
   <section class="admin-resource-empty"><span><?=$isTest?'✓':'▦'?></span><h3>Aún no hay <?=$isTest?'tests':'tabuladores'?>.</h3><p>Crea el primer recurso para comenzar a construir la biblioteca docente.</p><a class="btn btn-brand" href="<?=url('/admin/recursos/formulario?type='.$type)?>">Crear ahora →</a></section>
  <?php else:?>
-  <section class="admin-resource-grid" data-admin-resource-list>
+  <section class="admin-resource-list" data-admin-resource-list>
+   <div class="admin-resource-list-head" aria-hidden="true"><span>Recurso</span><span>Disponibilidad</span><span>Estado</span><span>Acciones</span></div>
    <?php foreach($resources as $index=>$r):$search=strtolower($r['name'].' '.($r['description']??'').' '.($r['subject']??'').' '.($r['group_name']??'').' '.($r['subgroup_name']??''));?>
-    <article class="admin-resource-card <?=$r['active']?'is-active':'is-inactive'?>" data-admin-resource-card data-search="<?=e($search)?>">
-     <div class="admin-resource-card-top">
-      <span class="admin-resource-number"><?=str_pad((string)($index+1),2,'0',STR_PAD_LEFT)?></span>
-      <span class="admin-resource-status"><i></i><?=$r['active']?'Visible':'Oculto'?></span>
-     </div>
+    <article class="admin-resource-list-row <?=$r['active']?'is-active':'is-inactive'?>" data-admin-resource-card data-search="<?=e($search)?>">
      <div class="admin-resource-main">
       <span class="admin-resource-symbol"><?=$isTest?'✓':'▦'?></span>
-      <div><span class="resource-meta"><?=e(strtoupper($r['subject']??'Todas las asignaturas'))?></span><h3><?=e($r['name'])?></h3></div>
+      <div><span class="resource-meta"><?=str_pad((string)($index+1),2,'0',STR_PAD_LEFT)?> · <?=e(strtoupper($r['subject']??'Todas las asignaturas'))?></span><h3><?=e($r['name'])?></h3><p class="admin-resource-description"><?=e($r['description']?:'Sin descripción')?></p><?php if(!$isTest&&($r['group_name']||$r['subgroup_name'])):?><div class="admin-resource-taxonomy"><?php if($r['group_name']):?><span><?=e($r['group_name'])?></span><?php endif;?><?php if($r['subgroup_name']):?><span><?=e($r['subgroup_name'])?></span><?php endif;?></div><?php endif;?></div>
      </div>
-     <p class="admin-resource-description"><?=e($r['description']?:'Sin descripción. Agrega una explicación para identificar mejor este recurso.')?></p>
-     <?php if(!$isTest&&($r['group_name']||$r['subgroup_name'])):?><div class="admin-resource-taxonomy"><?php if($r['group_name']):?><span>Grupo: <?=e($r['group_name'])?></span><?php endif;?><?php if($r['subgroup_name']):?><span>Subgrupo: <?=e($r['subgroup_name'])?></span><?php endif;?></div><?php endif;?>
      <div class="admin-resource-formats"><span class="<?=$r['file_path']?'available':''?>">↓ <?=$r['file_path']?'Archivo':'Sin archivo'?></span><span class="<?=$r['external_link']?'available':''?>">↗ <?=$r['external_link']?'Enlace activo':'Sin enlace'?></span></div>
-     <div class="admin-resource-actions"><a class="resource-view-action" href="<?=url('/admin/recursos/ver?id='.$r['id'])?>">Ver detalle</a><a class="resource-edit-action" href="<?=url('/admin/recursos/formulario?id='.$r['id'])?>">Editar</a><form method="post" action="<?=url('/admin/recursos/eliminar')?>" onsubmit="return confirm('¿Eliminar este recurso?')"><?=csrf_field()?><input type="hidden" name="id" value="<?=$r['id']?>"><input type="hidden" name="type" value="<?=$type?>"><button type="submit">Eliminar</button></form></div>
+     <span class="admin-resource-status"><i></i><?=$r['active']?'Visible':'Oculto'?></span>
+     <div class="admin-resource-actions"><a class="resource-view-action" href="<?=url('/admin/recursos/ver?id='.$r['id'])?>">Ver</a><a class="resource-edit-action" href="<?=url('/admin/recursos/formulario?id='.$r['id'])?>">Editar</a><form method="post" action="<?=url('/admin/recursos/eliminar')?>" onsubmit="return confirm('¿Eliminar este recurso?')"><?=csrf_field()?><input type="hidden" name="id" value="<?=$r['id']?>"><input type="hidden" name="type" value="<?=$type?>"><button type="submit" aria-label="Eliminar <?=e($r['name'])?>">Eliminar</button></form></div>
     </article>
    <?php endforeach;?>
   </section>
