@@ -5,15 +5,22 @@ $fieldTypes=[
  'checkbox_group'=>'Selección múltiple','file'=>'Archivo / comprobante',
 ];
 $current=$editingField??[];
+$activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
 ?>
 <main class="content container-fluid public-form-admin">
- <div class="page-toolbar flex-wrap">
-  <div><span class="eyebrow">INSCRIPCIONES</span><p class="text-secondary mb-0 mt-2">Configura la página pública, los datos de pago y sus preguntas.</p></div>
-  <a class="btn btn-brand" href="<?=url('/inscripcion')?>" target="_blank" rel="noopener">Ver formulario público ↗</a>
- </div>
+ <header class="form-admin-overview">
+  <div class="form-admin-overview-copy"><span>INSCRIPCIONES Y TALLERES</span><h2>Centro de gestión del formulario</h2><p>Configura la experiencia pública, administra las preguntas y revisa las respuestas desde un solo lugar.</p></div>
+  <div class="form-admin-overview-actions"><a class="btn btn-light" href="#campos">+ Agregar pregunta</a><a class="btn btn-brand" href="<?=url('/inscripcion')?>" target="_blank" rel="noopener noreferrer">Ver formulario público ↗</a></div>
+  <div class="form-admin-metrics">
+   <div><span class="form-metric-icon status">●</span><p><strong><?=$settings['status']==='open'?'Abierto':'Cerrado'?></strong><small>Estado actual</small></p></div>
+   <div><span class="form-metric-icon">F</span><p><strong><?=count($fields)?></strong><small>Campos creados</small></p></div>
+   <div><span class="form-metric-icon visible">✓</span><p><strong><?=$activeFields?></strong><small>Campos visibles</small></p></div>
+   <div><span class="form-metric-icon answers">R</span><p><strong><?=count($submissions)?></strong><small>Respuestas</small></p></div>
+  </div>
+ </header>
 
  <nav class="form-section-nav" aria-label="Secciones del formulario">
-  <a href="#informacion">Información</a><a href="#cuenta-bancaria">Cuenta bancaria</a><a href="#campos">Campos</a><a href="#respuestas">Respuestas <span><?=count($submissions)?></span></a>
+  <a href="#informacion"><b>01</b><span><strong>Información</strong><small>Textos y estado</small></span></a><a href="#cuenta-bancaria"><b>02</b><span><strong>Pagos</strong><small>Cuenta bancaria</small></span></a><a href="#campos"><b>03</b><span><strong>Preguntas</strong><small>Campos y orden</small></span></a><a href="#respuestas"><b>04</b><span><strong>Respuestas</strong><small><?=count($submissions)?> recibidas</small></span></a>
  </nav>
 
  <section class="card panel-card form-config-card" id="informacion">
