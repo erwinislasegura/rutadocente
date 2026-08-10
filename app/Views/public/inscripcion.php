@@ -14,7 +14,7 @@
  <div class="container header-inner">
   <a class="brand" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente"><div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div></a>
   <button class="menu" aria-label="Abrir menú" aria-expanded="false">☰</button>
-  <nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a class="active" href="<?=url('/inscripcion')?>">Inscripción</a><a href="<?=url('/contacto')?>">Contacto</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a></nav>
+  <nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/tabuladores')?>">Tabuladores</a><a href="<?=url('/recursos')?>">Recursos</a><a class="active" href="<?=url($formUrl)?>">Inscripción</a><a href="<?=url('/contacto')?>">Contacto</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a></nav>
   <a class="pill header-cta" href="<?=url('/login')?>">Acceso docente</a>
  </div>
 </header>
@@ -26,7 +26,7 @@
     <span class="eyebrow pale"><?=e($settings['eyebrow'])?></span>
     <h1><?=e($settings['title'])?></h1>
     <p><?=e($settings['intro'])?></p>
-    <div class="registration-meta"><span>✓ Proceso 2026</span><span>✓ Cupos limitados</span><span>✓ Confirmación por correo</span></div>
+    <div class="registration-meta"><span>✓ Formulario seguro</span><span>✓ Datos protegidos</span><span>✓ Confirmación inmediata</span></div>
    </div>
    <?php if(!empty($settings['bank_enabled'])):?><div class="registration-price"><small>VALOR DEL TALLER</small><strong><?=e($settings['bank_amount'])?></strong><span>Incluye materiales y recursos</span></div><?php endif;?>
   </div>
@@ -40,8 +40,8 @@
     <?php elseif(($settings['status']??'closed')!=='open'):?>
      <section class="registration-closed"><span>FORMULARIO CERRADO</span><h2>Las inscripciones no están disponibles en este momento.</h2><p>Si necesitas orientación, escríbenos y te ayudaremos a revisar las próximas fechas.</p><a class="btn" href="<?=url('/contacto')?>">Contactar a Ruta Docente →</a></section>
     <?php else:?>
-     <div class="registration-form-heading"><span class="eyebrow">FORMULARIO DE INSCRIPCIÓN</span><h2>Completa tus datos y selecciona tus talleres.</h2><p>Los campos marcados con <b>*</b> son obligatorios.</p></div>
-     <form class="registration-form" method="post" enctype="multipart/form-data" action="<?=url('/inscripcion')?>" novalidate>
+     <div class="registration-form-heading"><span class="eyebrow">FORMULARIO EN LÍNEA</span><h2>Completa la información solicitada.</h2><p>Los campos marcados con <b>*</b> son obligatorios.</p></div>
+     <form class="registration-form" method="post" enctype="multipart/form-data" action="<?=url($formUrl)?>" novalidate>
       <?=csrf_field()?><label class="form-honeypot" aria-hidden="true">Sitio web<input name="website" tabindex="-1" autocomplete="off"></label>
       <?php foreach($fields as $field):$id=(int)$field['id'];$type=$field['field_type'];$value=$old['field'][$id]??'';$error=$errors[$id]??null;?>
        <fieldset class="registration-field <?=$error?'has-error':''?> <?=$type==='file'?'is-file':''?>">

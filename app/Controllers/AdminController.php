@@ -68,21 +68,35 @@ class AdminController extends Controller {
 
  function publicForm():void {
   $this->admin();
-  $form=new PublicForm;
+  $this->view('admin/public-forms',['title'=>'Formularios públicos','forms'=>(new PublicForm)->forms()]);
+ }
+
+ function createPublicForm():void {
+  $this->admin();verify_csrf();$name=$this->clean($_POST['name']??'',160);$slug=$this->clean($_POST['slug']??'',120);
+  if($name===''){flash('error','Ingresa un nombre para crear el formulario.');redirect('/admin/formulario');}
+  $id=(new PublicForm)->createForm($name,$slug);flash('success','Formulario creado. Ahora puedes configurar sus preguntas.');redirect('/admin/formulario/editar?id='.$id);
+ }
+
+ function publicFormEditor():void {
+  $this->admin();$form=new PublicForm;$formId=(int)($_GET['id']??1);$settings=$form->settings($formId);
+  if(!$settings){http_response_code(404);exit('Formulario no encontrado');}
   $fieldId=(int)($_GET['field']??0);
   $this->view('admin/public-form',[
-   'title'=>'Formulario público',
-   'settings'=>$form->settings(),
-   'fields'=>$form->fields(),
-   'editingField'=>$fieldId?$form->field($fieldId):null,
-   'submissions'=>$form->submissions(),
+   'title'=>'Editar formulario','formId'=>$formId,'settings'=>$settings,
+   'fields'=>$form->fields($formId),
+   'editingField'=>$fieldId?$form->field($fieldId,$formId):null,
+   'submissions'=>$form->submissions($formId),
   ]);
  }
 
  function saveFormInformation():void {
-  $this->admin();verify_csrf();
+  $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
+  $name=$this->clean($_POST['name']??'',160);
+  if($name===''){flash('error','El nombre interno del formulario es obligatorio.');redirect('/admin/formulario/editar?id='.$formId.'#informacion');}
   $status=in_array($_POST['status']??'closed',['open','closed'],true)?$_POST['status']:'closed';
   (new PublicForm)->saveInformation([
+   'name'=>$name,
+   'slug'=>$formId===1?'inscripcion':$this->clean($_POST['slug']??'',120),
    'eyebrow'=>$this->clean($_POST['eyebrow']??'',80),
    'title'=>$this->clean($_POST['title']??'',180),
    'intro'=>$this->clean($_POST['intro']??'',3000),
@@ -93,12 +107,12 @@ class AdminController extends Controller {
    'success_title'=>$this->clean($_POST['success_title']??'',180),
    'success_message'=>$this->clean($_POST['success_message']??'',2000),
    'consent_text'=>$this->clean($_POST['consent_text']??'',1000),
-  ]);
-  flash('success','Información del formulario actualizada.');redirect('/admin/formulario#informacion');
+  ],$formId);
+  flash('success','Información del formulario actualizada.');redirect('/admin/formulario/editar?id='.$formId.'#informacion');
  }
 
  function saveBankAccount():void {
-  $this->admin();verify_csrf();
+  $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
   (new PublicForm)->saveBank([
    'bank_enabled'=>isset($_POST['bank_enabled'])?1:0,
    'bank_title'=>$this->clean($_POST['bank_title']??'',180),
@@ -110,18 +124,18 @@ class AdminController extends Controller {
    'bank_account_number'=>$this->clean($_POST['bank_account_number']??'',100),
    'bank_email'=>$this->clean($_POST['bank_email']??'',180),
    'bank_instructions'=>$this->clean($_POST['bank_instructions']??'',3000),
-  ]);
-  flash('success','Cuenta bancaria actualizada.');redirect('/admin/formulario#cuenta-bancaria');
+  ],$formId);
+  flash('success','Cuenta bancaria actualizada.');redirect('/admin/formulario/editar?id='.$formId.'#cuenta-bancaria');
  }
 
  function saveFormField():void {
-  $this->admin();verify_csrf();
+  $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
   $types=['text','email','tel','number','date','textarea','select','radio','checkbox','checkbox_group','file'];
   $type=in_array($_POST['field_type']??'text',$types,true)?$_POST['field_type']:'text';
   $label=$this->clean($_POST['label']??'',180);
-  if($label===''){flash('error','El nombre del campo es obligatorio.');redirect('/admin/formulario#campos');}
+  if($label===''){flash('error','El nombre del campo es obligatorio.');redirect('/admin/formulario/editar?id='.$formId.'#campos');}
   $options=array_values(array_filter(array_map(fn($option)=>$this->clean($option,300),preg_split('/\R/',$_POST['options']??'')?:[])));
-  if(in_array($type,['select','radio','checkbox_group'],true)&&!$options){flash('error','Agrega al menos una opción para este tipo de campo.');redirect('/admin/formulario#campos');}
+  if(in_array($type,['select','radio','checkbox_group'],true)&&!$options){flash('error','Agrega al menos una opción para este tipo de campo.');redirect('/admin/formulario/editar?id='.$formId.'#campos');}
   (new PublicForm)->saveField([
    'label'=>$label,'field_type'=>$type,
    'placeholder'=>$this->clean($_POST['placeholder']??'',180),
@@ -129,14 +143,14 @@ class AdminController extends Controller {
    'options'=>$options,'required'=>isset($_POST['required'])?1:0,'active'=>isset($_POST['active'])?1:0,
    'sort_order'=>max(0,min(999,(int)($_POST['sort_order']??0))),
    'max_selections'=>max(0,min(20,(int)($_POST['max_selections']??0))),
-  ],!empty($_POST['id'])?(int)$_POST['id']:null);
-  flash('success','Campo guardado correctamente.');redirect('/admin/formulario#campos');
+  ],$formId,!empty($_POST['id'])?(int)$_POST['id']:null);
+  flash('success','Campo guardado correctamente.');redirect('/admin/formulario/editar?id='.$formId.'#campos');
  }
 
  function deleteFormField():void {
-  $this->admin();verify_csrf();
-  (new PublicForm)->delete((int)($_POST['id']??0));
-  flash('success','Campo eliminado. Las respuestas históricas se conservaron.');redirect('/admin/formulario#campos');
+  $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
+  (new PublicForm)->deleteField((int)($_POST['id']??0),$formId);
+  flash('success','Campo eliminado. Las respuestas históricas se conservaron.');redirect('/admin/formulario/editar?id='.$formId.'#campos');
  }
 
  function downloadFormFile():void {

@@ -2,6 +2,7 @@
 namespace App\Core;
 use App\Models\SiteSetting;
 use App\Models\User;
+use App\Models\PublicForm;
 class Controller {
  protected function view(string $view,array $data=[]):void{
   extract($data);$viewFile=dirname(__DIR__).'/Views/'.$view.'.php';
@@ -37,7 +38,12 @@ class Controller {
    'preguntas-frecuentes'=>['Preguntas frecuentes sobre Ruta Docente 2026','Respuestas sobre acceso, asignaturas, tests, tabuladores, recursos, dispositivos compatibles y soporte de Ruta Docente.','/preguntas-frecuentes','Preguntas frecuentes'],
    'inscripcion'=>['Inscripción a talleres para docentes | Ruta Docente','Formulario de inscripción a talleres y actividades de preparación para docentes. Revisa la información, completa tus datos y reserva tu cupo.','/inscripcion','Inscripción'],
   ];
-  $seo=$pages[$view]??$pages['home'];[$title,$description,$path,$label]=$seo;
+  $seo=$pages[$view]??$pages['home'];
+  if($view==='inscripcion'&&!empty($_GET['form'])){
+   $dynamic=(new PublicForm)->settingsBySlug((string)$_GET['form']);
+   if($dynamic)$seo=[($dynamic['title']?:$dynamic['name']).' | Ruta Docente',trim((string)$dynamic['intro'])?:'Formulario de inscripción de Ruta Docente.','/inscripcion?form='.rawurlencode((string)$dynamic['slug']),$dynamic['name']?:'Formulario'];
+  }
+  [$title,$description,$path,$label]=$seo;
   $canonical=absolute_url($path);$logo=absolute_url('/assets/img/logo-ruta-docente.png');
   $graph=[
    ['@type'=>'Organization','@id'=>absolute_url('/').'#organization','name'=>'Ruta Docente','url'=>absolute_url('/'),'logo'=>['@type'=>'ImageObject','url'=>$logo],'email'=>'aulaentretenida0@gmail.com','telephone'=>'+56 9 7577 8434','sameAs'=>['https://www.facebook.com/AulaEntretenida']],

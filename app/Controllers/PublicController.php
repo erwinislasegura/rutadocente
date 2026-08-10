@@ -16,6 +16,7 @@ class PublicController extends Controller {
 
  function sitemap():void {
   $pages=['/'=>['1.0','weekly'],'/portafolio'=>['0.9','weekly'],'/recursos'=>['0.9','weekly'],'/tests'=>['0.8','weekly'],'/tabuladores'=>['0.8','weekly'],'/clases-asincronicas'=>['0.8','weekly'],'/asignaturas'=>['0.8','weekly'],'/inscripcion'=>['0.7','weekly'],'/preguntas-frecuentes'=>['0.6','monthly'],'/contacto'=>['0.6','monthly']];
+  foreach((new PublicForm)->forms() as $form)if($form['status']==='open'&&$form['slug']!=='inscripcion')$pages['/inscripcion?form='.rawurlencode($form['slug'])]=['0.6','weekly'];
   header('Content-Type: application/xml; charset=UTF-8');
   echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
   foreach($pages as $path=>$meta)echo ' <url><loc>'.e(absolute_url($path)).'</loc><lastmod>2026-08-08</lastmod><changefreq>'.$meta[1].'</changefreq><priority>'.$meta[0].'</priority></url>' . "\n";
@@ -29,29 +30,32 @@ class PublicController extends Controller {
 
  function registration():void {
   $form=new PublicForm;
-  $errors=$_SESSION['_public_form_errors']??[];
-  $old=$_SESSION['_public_form_old']??[];
-  $success=$_SESSION['_public_form_success']??null;
-  unset($_SESSION['_public_form_errors'],$_SESSION['_public_form_old'],$_SESSION['_public_form_success']);
-  $settings=$form->settings();
-  $fields=$form->fields(true);
-  $this->publicPage('inscripcion',compact('form','errors','old','success','settings','fields'));
+  $settings=$this->requestedForm($form);if(!$settings){http_response_code(404);exit('Formulario no encontrado');}
+  $formId=(int)$settings['id'];$stateKey='_public_form_'.$formId;
+  $errors=$_SESSION[$stateKey.'_errors']??[];
+  $old=$_SESSION[$stateKey.'_old']??[];
+  $success=$_SESSION[$stateKey.'_success']??null;
+  unset($_SESSION[$stateKey.'_errors'],$_SESSION[$stateKey.'_old'],$_SESSION[$stateKey.'_success']);
+  $fields=$form->fields($formId,true);
+  $formUrl=$this->publicFormPath($settings);
+  $this->publicPage('inscripcion',compact('form','errors','old','success','settings','fields','formUrl'));
  }
 
  function submitRegistration():void {
   verify_csrf();
   $form=new PublicForm;
-  $settings=$form->settings();
+  $settings=$this->requestedForm($form);if(!$settings){http_response_code(404);exit('Formulario no encontrado');}
+  $formId=(int)$settings['id'];$stateKey='_public_form_'.$formId;$formUrl=$this->publicFormPath($settings);
   if(($settings['status']??'closed')!=='open'){
    flash('error','El formulario no está recibiendo respuestas en este momento.');
-   redirect('/inscripcion');
+   redirect($formUrl);
   }
   if(trim((string)($_POST['website']??''))!==''){
-   $_SESSION['_public_form_success']=$settings['success_message']??'Tu respuesta fue registrada.';
-   redirect('/inscripcion');
+   $_SESSION[$stateKey.'_success']=$settings['success_message']??'Tu respuesta fue registrada.';
+   redirect($formUrl);
   }
 
-  $fields=$form->fields(true);
+  $fields=$form->fields($formId,true);
   $posted=is_array($_POST['field']??null)?$_POST['field']:[];
   $errors=[];
   $answers=[];
@@ -101,23 +105,23 @@ class PublicController extends Controller {
   if(trim((string)($settings['consent_text']??''))!==''&&!isset($_POST['consent']))$errors['_consent']='Debes aceptar esta declaración para enviar el formulario.';
 
   if($errors){
-   $_SESSION['_public_form_errors']=$errors;
-   $_SESSION['_public_form_old']=['field'=>$posted];
-   redirect('/inscripcion#formulario');
+   $_SESSION[$stateKey.'_errors']=$errors;
+   $_SESSION[$stateKey.'_old']=['field'=>$posted];
+   redirect($formUrl.'#formulario');
   }
 
   foreach($pendingFiles as $id=>$pending){
    $dir=config('form_upload_dir');
    if(!is_dir($dir)&&!mkdir($dir,0750,true)&&!is_dir($dir)){
-    $_SESSION['_public_form_errors']=[$id=>'No fue posible preparar el almacenamiento del archivo.'];
-    $_SESSION['_public_form_old']=['field'=>$posted];
-    redirect('/inscripcion#formulario');
+    $_SESSION[$stateKey.'_errors']=[$id=>'No fue posible preparar el almacenamiento del archivo.'];
+    $_SESSION[$stateKey.'_old']=['field'=>$posted];
+    redirect($formUrl.'#formulario');
    }
    $stored=bin2hex(random_bytes(18)).'.'.$pending['extension'];
    if(!move_uploaded_file($pending['upload']['tmp_name'],$dir.'/'.$stored)){
-    $_SESSION['_public_form_errors']=[$id=>'No fue posible guardar el archivo. Inténtalo nuevamente.'];
-    $_SESSION['_public_form_old']=['field'=>$posted];
-    redirect('/inscripcion#formulario');
+    $_SESSION[$stateKey.'_errors']=[$id=>'No fue posible guardar el archivo. Inténtalo nuevamente.'];
+    $_SESSION[$stateKey.'_old']=['field'=>$posted];
+    redirect($formUrl.'#formulario');
    }
    $answers[$id]=['label'=>$pending['field']['label'],'type'=>'file','value'=>['stored'=>$stored,'original'=>$pending['upload']['name']]];
   }
@@ -128,9 +132,18 @@ class PublicController extends Controller {
    if($answer['type']==='email'&&$email==='')$email=(string)$answer['value'];
    if($name===''&&str_contains(strtolower($answer['label']),'nombre')&&is_string($answer['value']))$name=$answer['value'];
   }
-  $form->createSubmission($answers,$name,$email);
-  $_SESSION['_public_form_success']=$settings['success_message']??'Tu respuesta fue registrada correctamente.';
-  redirect('/inscripcion');
+  $form->createSubmission($formId,$answers,$name,$email);
+  $_SESSION[$stateKey.'_success']=$settings['success_message']??'Tu respuesta fue registrada correctamente.';
+  redirect($formUrl);
+ }
+
+ private function requestedForm(PublicForm $form):array {
+  $slug=trim((string)($_GET['form']??''));
+  return $slug!==''?$form->settingsBySlug($slug):$form->settings(1);
+ }
+
+ private function publicFormPath(array $settings):string {
+  return '/inscripcion'.(($settings['slug']??'inscripcion')==='inscripcion'?'':'?form='.rawurlencode((string)$settings['slug']));
  }
 
  private function formUpload(int $id):array {

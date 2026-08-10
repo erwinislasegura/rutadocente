@@ -6,11 +6,13 @@ $fieldTypes=[
 ];
 $current=$editingField??[];
 $activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
+$publicUrl='/inscripcion'.($settings['slug']==='inscripcion'?'':'?form='.rawurlencode($settings['slug']));
 ?>
 <main class="content container-fluid public-form-admin">
+ <div class="page-toolbar"><a class="btn btn-outline-secondary" href="<?=url('/admin/formulario')?>">← Volver a formularios</a></div>
  <header class="form-admin-overview">
-  <div class="form-admin-overview-copy"><span>INSCRIPCIONES Y TALLERES</span><h2>Centro de gestión del formulario</h2><p>Configura la experiencia pública, administra las preguntas y revisa las respuestas desde un solo lugar.</p></div>
-  <div class="form-admin-overview-actions"><a class="btn btn-light" href="#campos">+ Agregar pregunta</a><a class="btn btn-brand" href="<?=url('/inscripcion')?>" target="_blank" rel="noopener noreferrer">Ver formulario público ↗</a></div>
+  <div class="form-admin-overview-copy"><span>FORMULARIO #<?=$formId?></span><h2><?=e($settings['name']?:$settings['title'])?></h2><p>Configura la experiencia pública, administra las preguntas y revisa las respuestas de este formulario.</p></div>
+  <div class="form-admin-overview-actions"><a class="btn btn-light" href="#campos">+ Agregar pregunta</a><a class="btn btn-brand" href="<?=url($publicUrl)?>" target="_blank" rel="noopener noreferrer">Ver formulario público ↗</a></div>
   <div class="form-admin-metrics">
    <div><span class="form-metric-icon status">●</span><p><strong><?=$settings['status']==='open'?'Abierto':'Cerrado'?></strong><small>Estado actual</small></p></div>
    <div><span class="form-metric-icon">F</span><p><strong><?=count($fields)?></strong><small>Campos creados</small></p></div>
@@ -26,8 +28,10 @@ $activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
  <section class="card panel-card form-config-card" id="informacion">
   <div class="card-body p-4 p-xl-5">
    <div class="config-heading"><div><span>01</span><div><h2>Información del formulario</h2><p>Textos principales, disponibilidad y mensaje de confirmación.</p></div></div><span class="status-chip <?=$settings['status']==='open'?'is-open':'is-closed'?>"><?=$settings['status']==='open'?'Recibiendo respuestas':'Formulario cerrado'?></span></div>
-   <form method="post" action="<?=url('/admin/formulario/informacion')?>"><?=csrf_field()?>
+   <form method="post" action="<?=url('/admin/formulario/informacion')?>"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>">
     <div class="row g-4">
+     <div class="col-md-6"><label class="form-label">Nombre interno</label><input class="form-control" name="name" maxlength="160" required value="<?=e($settings['name'])?>"></div>
+     <div class="col-md-6"><label class="form-label">Identificador de URL <?=$formId===1?'<span class="text-secondary fw-normal">(formulario principal)</span>':''?></label><div class="form-slug-input"><i><?=$formId===1?'/':'/inscripcion?form='?></i><input class="form-control" name="slug" maxlength="120" required value="<?=e($settings['slug'])?>" <?=$formId===1?'readonly':''?>></div></div>
      <div class="col-md-4"><label class="form-label">Texto superior</label><input class="form-control" name="eyebrow" maxlength="80" value="<?=e($settings['eyebrow'])?>"></div>
      <div class="col-md-8"><label class="form-label">Título</label><input class="form-control" name="title" maxlength="180" required value="<?=e($settings['title'])?>"></div>
      <div class="col-12"><label class="form-label">Presentación</label><textarea class="form-control" name="intro" rows="4"><?=e($settings['intro'])?></textarea></div>
@@ -47,7 +51,7 @@ $activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
  <section class="card panel-card form-config-card" id="cuenta-bancaria">
   <div class="card-body p-4 p-xl-5">
    <div class="config-heading"><div><span>02</span><div><h2>Cuenta bancaria</h2><p>Datos visibles para que el docente realice la transferencia.</p></div></div></div>
-   <form method="post" action="<?=url('/admin/formulario/cuenta-bancaria')?>"><?=csrf_field()?>
+   <form method="post" action="<?=url('/admin/formulario/cuenta-bancaria')?>"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>">
     <div class="row g-4">
      <div class="col-12"><div class="form-check form-switch permission-check"><input class="form-check-input" type="checkbox" role="switch" id="bank_enabled" name="bank_enabled" value="1" <?=$settings['bank_enabled']?'checked':''?>><label class="form-check-label" for="bank_enabled"><strong>Mostrar datos bancarios</strong><span>La cuenta aparecerá junto al formulario público.</span></label></div></div>
      <div class="col-md-8"><label class="form-label">Título del bloque</label><input class="form-control" name="bank_title" value="<?=e($settings['bank_title'])?>"></div>
@@ -76,15 +80,15 @@ $activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
        <article class="field-row <?=$field['active']?'':'is-inactive'?>">
         <span class="field-order"><?=e($field['sort_order'])?></span>
         <div><b><?=e($field['label'])?></b><small><?=e($fieldTypes[$field['field_type']]??$field['field_type'])?> · <?=$field['required']?'Obligatorio':'Opcional'?><?=$field['field_type']==='checkbox_group'&&$field['max_selections']?' · Máx. '.e($field['max_selections']):''?></small></div>
-        <a class="btn btn-sm btn-outline-secondary" href="<?=url('/admin/formulario?field='.$field['id'].'#campos')?>">Editar</a>
-        <form method="post" action="<?=url('/admin/formulario/campos/eliminar')?>" onsubmit="return confirm('¿Eliminar este campo?')"><?=csrf_field()?><input type="hidden" name="id" value="<?=$field['id']?>"><button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Eliminar <?=e($field['label'])?>">×</button></form>
+        <a class="btn btn-sm btn-outline-secondary" href="<?=url('/admin/formulario/editar?id='.$formId.'&field='.$field['id'].'#campos')?>">Editar</a>
+        <form method="post" action="<?=url('/admin/formulario/campos/eliminar')?>" onsubmit="return confirm('¿Eliminar este campo?')"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>"><input type="hidden" name="id" value="<?=$field['id']?>"><button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Eliminar <?=e($field['label'])?>">×</button></form>
        </article>
       <?php endforeach;?>
      </div>
     </div>
     <form class="field-editor" method="post" action="<?=url('/admin/formulario/campos/guardar')?>">
-     <?=csrf_field()?><input type="hidden" name="id" value="<?=e($current['id']??'')?>">
-     <div class="d-flex align-items-start justify-content-between gap-3 mb-4"><div><span class="eyebrow"><?=$current?'EDITAR PREGUNTA':'NUEVA PREGUNTA'?></span><h3 class="mt-2 mb-0"><?=$current?'Ajusta este campo':'Agrega un campo'?></h3></div><?php if($current):?><a class="btn btn-sm btn-outline-secondary" href="<?=url('/admin/formulario#campos')?>">Cancelar</a><?php endif;?></div>
+     <?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>"><input type="hidden" name="id" value="<?=e($current['id']??'')?>">
+     <div class="d-flex align-items-start justify-content-between gap-3 mb-4"><div><span class="eyebrow"><?=$current?'EDITAR PREGUNTA':'NUEVA PREGUNTA'?></span><h3 class="mt-2 mb-0"><?=$current?'Ajusta este campo':'Agrega un campo'?></h3></div><?php if($current):?><a class="btn btn-sm btn-outline-secondary" href="<?=url('/admin/formulario/editar?id='.$formId.'#campos')?>">Cancelar</a><?php endif;?></div>
      <div class="mb-3"><label class="form-label">Pregunta o etiqueta</label><input class="form-control" required maxlength="180" name="label" value="<?=e($current['label']??'')?>"></div>
      <div class="row g-3">
       <div class="col-md-7"><label class="form-label">Tipo de campo</label><select class="form-select" name="field_type" data-field-type><?php foreach($fieldTypes as $value=>$label):?><option value="<?=$value?>" <?=($current['field_type']??'text')===$value?'selected':''?>><?=e($label)?></option><?php endforeach;?></select></div>
