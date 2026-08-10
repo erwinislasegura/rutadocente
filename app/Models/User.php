@@ -5,7 +5,7 @@ class User extends BaseModel {
  public function byEmail(string $email):?array{$s=$this->db()->prepare('SELECT u.*,r.name role,s.name subject FROM users u JOIN roles r ON r.id=u.role_id LEFT JOIN subjects s ON s.id=u.subject_id WHERE u.email=? AND u.active=1');$s->execute([$email]);return $s->fetch()?:null;}
  public function detailed():array{return $this->db()->query('SELECT u.*,r.name role,s.name subject FROM users u JOIN roles r ON r.id=u.role_id LEFT JOIN subjects s ON s.id=u.subject_id ORDER BY u.id DESC')->fetchAll();}
  public function findDetailed(int $id):?array{$s=$this->db()->prepare('SELECT u.*,r.name role,s.name subject FROM users u JOIN roles r ON r.id=u.role_id LEFT JOIN subjects s ON s.id=u.subject_id WHERE u.id=?');$s->execute([$id]);return $s->fetch()?:null;}
- public function save(array $d,?int $id=null):void {
+ public function save(array $d,?int $id=null):int {
   $firstName=trim((string)($d['first_name']??''));
   $lastName=trim((string)($d['last_name']??''));
   $email=strtolower(trim((string)($d['email']??'')));
@@ -35,11 +35,14 @@ class User extends BaseModel {
    $set=implode(',',array_map(fn($key)=>"$key=?",array_keys($v)));
    $stmt=$this->db()->prepare("UPDATE users SET $set WHERE id=?");
    $stmt->execute([...array_values($v),$id]);
+   return $id;
   }else{
    $keys=array_keys($v);
    $stmt=$this->db()->prepare('INSERT INTO users ('.implode(',',$keys).') VALUES ('.implode(',',array_fill(0,count($keys),'?')).')');
    $stmt->execute(array_values($v));
+   return (int)$this->db()->lastInsertId();
   }
  }
+ public function updatePassword(int $id,string $password):void{$s=$this->db()->prepare('UPDATE users SET password=? WHERE id=?');$s->execute([password_hash($password,PASSWORD_DEFAULT),$id]);}
  public function updateProfile(int $id,array $d,?string $avatarPath=null):void{if($avatarPath){$s=$this->db()->prepare('UPDATE users SET first_name=?,last_name=?,phone=?,avatar_path=? WHERE id=?');$s->execute([$d['first_name'],$d['last_name'],$d['phone'],$avatarPath,$id]);}else{$s=$this->db()->prepare('UPDATE users SET first_name=?,last_name=?,phone=? WHERE id=?');$s->execute([$d['first_name'],$d['last_name'],$d['phone'],$id]);}}
 }

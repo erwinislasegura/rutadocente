@@ -428,3 +428,19 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
  .admin-resource-list-row .admin-resource-actions form{grid-column:auto}
  .admin-resource-list-row .admin-resource-actions a,.admin-resource-list-row .admin-resource-actions button{width:auto;background:#f4f6f6}
 }
+
+/* Acciones compactas del módulo de usuarios */
+.user-actions-dropdown{display:flex;justify-content:flex-end}
+.user-actions-trigger{display:inline-flex;align-items:center;gap:.45rem;min-height:34px;padding:.35rem .55rem;border:1px solid #d6dfe5;border-radius:.48rem;color:#355267;background:#fff;font-size:.68rem;font-weight:800}
+.user-actions-trigger span{color:#0752a3;font-size:1rem;line-height:.7}
+.user-actions-trigger:hover,.user-actions-trigger[aria-expanded="true"]{border-color:#afc7dd;color:#0752a3;background:#f3f8fd}
+.user-actions-dropdown .dropdown-menu{min-width:225px;padding:.38rem;border-color:#d8e2e8;border-radius:.62rem;box-shadow:0 12px 30px rgba(3,30,76,.13)}
+.user-actions-dropdown .dropdown-item{display:flex;align-items:center;gap:.55rem;min-height:36px;padding:.42rem .55rem;border:0;border-radius:.4rem;color:#425d70;background:transparent;font-size:.72rem;font-weight:700}
+.user-actions-dropdown .dropdown-item>span{display:grid;place-items:center;width:22px;height:22px;flex:0 0 22px;border-radius:.35rem;color:#0752a3;background:#eaf2fc;font-size:.65rem;font-weight:900}
+.user-actions-dropdown form{margin:0}
+.user-actions-dropdown .send-registration-action{color:#0752a3}
+.user-actions-dropdown .send-registration-action>span{color:#257657;background:#e5f4ed}
+.user-actions-dropdown .delete-action{width:100%;color:#b44754;text-align:left}
+.user-actions-dropdown .delete-action>span{color:#b44754;background:#fbecef}
+.user-actions-dropdown .dropdown-item:hover{background:#f2f6f8}
+@media(max-width:767.98px){.user-actions-dropdown{justify-content:flex-start}}

@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Database;
 use App\Models\{User,Catalog,Resource,PublicForm,SiteSetting};
+use App\Services\RegistrationMailer;
 
 class AdminController extends Controller {
  function dashboard():void{$this->admin();$db=Database::connection();$stats=['usuarios'=>$db->query('SELECT COUNT(*) FROM users')->fetchColumn(),'docentes'=>$db->query("SELECT COUNT(*) FROM users u JOIN roles r ON r.id=u.role_id WHERE r.name='docente'")->fetchColumn(),'tests'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='test'")->fetchColumn(),'tabuladores'=>$db->query("SELECT COUNT(*) FROM resources WHERE type='tabulador'")->fetchColumn()];$this->view('admin/dashboard',['title'=>'Panel de control','stats'=>$stats]);}
@@ -13,8 +14,14 @@ class AdminController extends Controller {
  function saveUser():void {
   $this->admin();verify_csrf();$id=!empty($_POST['id'])?(int)$_POST['id']:null;
   try{
-   (new User)->save($_POST,$id);
-   flash('success','Usuario guardado correctamente.');redirect('/admin/usuarios');
+   $users=new User;$userId=$users->save($_POST,$id);
+   if(!$id){
+    $created=$users->findDetailed($userId);
+    try{$sent=$created&&(new RegistrationMailer)->send($created,(string)$_POST['password']);}catch(\Throwable){$sent=false;}
+    flash('success',$sent?'Usuario creado y correo de acceso enviado correctamente.':'Usuario creado correctamente.');
+    if(!$sent)flash('error','La cuenta fue creada, pero el servidor no pudo enviar el correo de acceso. Puedes reintentarlo desde el menú de acciones.');
+   }else flash('success','Usuario actualizado correctamente.');
+   redirect('/admin/usuarios');
   }catch(\InvalidArgumentException $error){
    flash('error',$error->getMessage());redirect('/admin/usuarios/formulario'.($id?'?id='.$id:''));
   }catch(\PDOException $error){
@@ -22,6 +29,17 @@ class AdminController extends Controller {
    flash('error',$duplicate?'Ya existe un usuario registrado con ese correo electrónico.':'No fue posible guardar el usuario. Revisa los datos e inténtalo nuevamente.');
    redirect('/admin/usuarios/formulario'.($id?'?id='.$id:''));
   }
+ }
+ function sendUserRegistration():void {
+  $this->admin();verify_csrf();$id=(int)($_POST['id']??0);$users=new User;$user=$users->findDetailed($id);
+  if(!$user){flash('error','El usuario seleccionado no existe.');redirect('/admin/usuarios');}
+  $password=$this->temporaryPassword();$db=Database::connection();
+  try{
+   $db->beginTransaction();$users->updatePassword($id,$password);
+   if(!(new RegistrationMailer)->send($user,$password))throw new \RuntimeException('El servidor de correo rechazó el envío.');
+   $db->commit();flash('success','Correo de registro enviado a '.$user['email'].'. Se generó una nueva contraseña temporal.');
+  }catch(\Throwable $error){if($db->inTransaction())$db->rollBack();flash('error','No fue posible enviar el correo de registro. La contraseña anterior se mantuvo sin cambios.');}
+  redirect('/admin/usuarios');
  }
  function deleteUser():void{$this->admin();verify_csrf();(new User)->delete((int)$_POST['id']);flash('success','Usuario eliminado.');redirect('/admin/usuarios');}
 
@@ -142,4 +160,5 @@ class AdminController extends Controller {
   $value=trim((string)$value);
   return function_exists('mb_substr')?mb_substr($value,0,$max):substr($value,0,$max);
  }
+ private function temporaryPassword():string{return 'RD-'.strtoupper(bin2hex(random_bytes(5)));}
 }
