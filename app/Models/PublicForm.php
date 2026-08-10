@@ -114,7 +114,7 @@ class PublicForm extends BaseModel {
         if(!in_array('name',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN name VARCHAR(160) NULL AFTER id");
         if(!in_array('slug',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN slug VARCHAR(120) NULL AFTER name");
         if(!in_array('cover_image',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN cover_image VARCHAR(255) NULL AFTER slug");
-        if(!in_array('created_at',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP BEFORE updated_at");
+        if(!in_array('created_at',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
         $idColumn=current(array_filter($settingsColumns,fn($column)=>$column['Field']==='id'))?:[];
         if(!preg_match('/^int(?:\(\d+\))? unsigned$/',strtolower((string)($idColumn['Type']??'')))||!str_contains(strtolower((string)($idColumn['Extra']??'')),'auto_increment'))$db->exec("ALTER TABLE public_form_settings MODIFY id INT UNSIGNED NOT NULL AUTO_INCREMENT");
         $db->exec("UPDATE public_form_settings SET name=COALESCE(NULLIF(name,''),title),slug=COALESCE(NULLIF(slug,''),IF(id=1,'inscripcion',CONCAT('formulario-',id))) WHERE name IS NULL OR name='' OR slug IS NULL OR slug=''");

@@ -20,7 +20,7 @@ PREPARE migration_statement FROM @migration_sql; EXECUTE migration_statement; DE
 
 SET @migration_sql = IF(
  (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='public_form_settings' AND COLUMN_NAME='created_at')=0,
- 'ALTER TABLE public_form_settings ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP BEFORE updated_at',
+ 'ALTER TABLE public_form_settings ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
  'SELECT ''La columna created_at ya existe'''
 );
 PREPARE migration_statement FROM @migration_sql; EXECUTE migration_statement; DEALLOCATE PREPARE migration_statement;
