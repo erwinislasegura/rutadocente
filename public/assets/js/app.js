@@ -21,6 +21,38 @@ const syncFieldOptions = () => {
 fieldType?.addEventListener('change', syncFieldOptions);
 syncFieldOptions();
 
+// Saca temporalmente los menús de acciones fuera de la tabla para evitar que
+// las últimas filas los recorten por el overflow del contenedor responsive.
+const floatingUserMenus = new WeakMap();
+document.addEventListener('shown.bs.dropdown', event => {
+  const toggle = event.target;
+  if (!toggle.matches('.user-actions-trigger')) return;
+  const menu = toggle.closest('.user-actions-dropdown')?.querySelector('.dropdown-menu');
+  if (!menu) return;
+  const marker = document.createComment('user-actions-menu');
+  menu.before(marker);
+  document.body.append(menu);
+  menu.classList.add('user-actions-floating');
+  const triggerRect = toggle.getBoundingClientRect();
+  const menuRect = menu.getBoundingClientRect();
+  const left = Math.max(8, Math.min(triggerRect.right - menuRect.width, window.innerWidth - menuRect.width - 8));
+  const fitsBelow = window.innerHeight - triggerRect.bottom >= menuRect.height + 8;
+  const top = fitsBelow ? triggerRect.bottom + 5 : Math.max(8, triggerRect.top - menuRect.height - 5);
+  menu.style.setProperty('--actions-left', `${left}px`);
+  menu.style.setProperty('--actions-top', `${top}px`);
+  floatingUserMenus.set(toggle, {menu, marker});
+});
+document.addEventListener('hide.bs.dropdown', event => {
+  const toggle = event.target;
+  const state = floatingUserMenus.get(toggle);
+  if (!state) return;
+  state.marker.replaceWith(state.menu);
+  state.menu.classList.remove('user-actions-floating');
+  state.menu.style.removeProperty('--actions-left');
+  state.menu.style.removeProperty('--actions-top');
+  floatingUserMenus.delete(toggle);
+});
+
 document.querySelectorAll('[data-resource-search]').forEach(input => input.addEventListener('input', () => {
   const term = input.value.trim().toLocaleLowerCase('es');
   const cards = [...document.querySelectorAll('[data-resource-card]')];

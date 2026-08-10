@@ -443,4 +443,5 @@ body{min-height:100vh;background:var(--cream);line-height:1.55}h1,h2,h3,h4,h5,h6
 .user-actions-dropdown .delete-action{width:100%;color:#b44754;text-align:left}
 .user-actions-dropdown .delete-action>span{color:#b44754;background:#fbecef}
 .user-actions-dropdown .dropdown-item:hover{background:#f2f6f8}
+.user-actions-dropdown .dropdown-menu.user-actions-floating{position:fixed!important;inset:auto!important;top:var(--actions-top)!important;left:var(--actions-left)!important;z-index:1090!important;transform:none!important;display:block}
 @media(max-width:767.98px){.user-actions-dropdown{justify-content:flex-start}}

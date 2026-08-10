@@ -2,9 +2,11 @@
 namespace App\Services;
 
 final class RegistrationMailer {
+ private string $lastError='';
+
  public function send(array $user,string $plainPassword):bool {
   $email=strtolower(trim((string)($user['email']??'')));
-  if(!filter_var($email,FILTER_VALIDATE_EMAIL)||$plainPassword===''||!function_exists('mail'))return false;
+  if(!filter_var($email,FILTER_VALIDATE_EMAIL)||$plainPassword===''){return false;}
 
   $loginUrl=absolute_url('/login');
   $logoUrl=absolute_url('/assets/img/logo-ruta-docente.png');
@@ -26,8 +28,22 @@ final class RegistrationMailer {
    'Reply-To: '.$replyTo,
    'X-Mailer: Ruta Docente',
   ];
-  return mail($email,$encodedSubject,$html,implode("\r\n",$headers));
+  $smtp=new SmtpTransport;
+  if($smtp->send($email,$encodedSubject,$html,$headers)){$this->log($email,'smtp','accepted');return true;}
+
+  $this->lastError=$smtp->error();
+  if(config('native_mail_fallback')&&function_exists('mail')&&mail($email,$encodedSubject,$html,implode("\r\n",$headers))){$this->log($email,'mail','accepted_after_smtp_failure');return true;}
+  $this->log($email,'failed',$this->lastError?:'transport_unavailable');
+  return false;
  }
 
+ public function error():string{return $this->lastError;}
+
  private function headerValue(string $value):string{return trim(str_replace(["\r","\n"],'',$value));}
+ private function log(string $email,string $transport,string $status):void {
+  $directory=dirname(__DIR__,2).'/storage/logs';
+  if(!is_dir($directory))@mkdir($directory,0755,true);
+  $line=sprintf("[%s] registration_email recipient=%s transport=%s status=%s\n",date('c'),$email,$transport,preg_replace('/\s+/','_',$status));
+  @file_put_contents($directory.'/mail.log',$line,FILE_APPEND|LOCK_EX);
+ }
 }
