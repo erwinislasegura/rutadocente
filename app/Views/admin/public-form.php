@@ -72,7 +72,7 @@ $publicUrl='/inscripcion?form='.rawurlencode($settings['slug']);
 
  <section class="card panel-card form-config-card" id="campos">
   <div class="card-body p-4 p-xl-5">
-   <div class="config-heading"><div><span>03</span><div><h2>Campos del formulario</h2><p>Crea preguntas, define su orden y elige cuáles son obligatorias.</p></div></div></div>
+   <div class="config-heading"><div><span>03</span><div><h2>Preguntas del formulario</h2><p>Edita una pregunta para quitar alternativas individuales o usa “Eliminar” para borrar la pregunta completa.</p></div></div></div>
    <div class="field-builder-grid">
     <div>
      <?php if(!$fields):?><div class="empty-state">Aún no hay campos configurados.</div><?php endif;?>
@@ -82,7 +82,7 @@ $publicUrl='/inscripcion?form='.rawurlencode($settings['slug']);
         <span class="field-order"><?=e($field['sort_order'])?></span>
         <div><b><?=e($field['label'])?></b><small><?=e($fieldTypes[$field['field_type']]??$field['field_type'])?> · <?=$field['required']?'Obligatorio':'Opcional'?><?=$field['field_type']==='checkbox_group'&&$field['max_selections']?' · Máx. '.e($field['max_selections']):''?></small></div>
         <a class="btn btn-sm btn-outline-secondary" href="<?=url('/admin/formulario/editar?id='.$formId.'&field='.$field['id'].'#campos')?>">Editar</a>
-        <form method="post" action="<?=url('/admin/formulario/campos/eliminar')?>" onsubmit="return confirm('¿Eliminar este campo?')"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>"><input type="hidden" name="id" value="<?=$field['id']?>"><button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Eliminar <?=e($field['label'])?>">×</button></form>
+        <form method="post" action="<?=url('/admin/formulario/campos/eliminar')?>" onsubmit="return confirm('¿Eliminar esta pregunta completa? Dejará de mostrarse inmediatamente en el formulario.')"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>"><input type="hidden" name="id" value="<?=$field['id']?>"><button class="btn btn-sm btn-outline-danger field-delete-action" type="submit" aria-label="Eliminar <?=e($field['label'])?>">Eliminar</button></form>
        </article>
       <?php endforeach;?>
      </div>

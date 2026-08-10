@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="<?=e($settings['title'])?> · Ruta Docente">
  <title><?=e($settings['title'])?> | Ruta Docente</title>
- <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260810-accesshub1')?>">
+ <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260810-registration2')?>">
  <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body class="registration-page">

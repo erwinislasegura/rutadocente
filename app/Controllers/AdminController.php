@@ -160,7 +160,16 @@ class AdminController extends Controller {
  function deleteFormField():void {
   $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
   (new PublicForm)->deleteField((int)($_POST['id']??0),$formId);
-  flash('success','Campo eliminado. Las respuestas históricas se conservaron.');redirect('/admin/formulario/editar?id='.$formId.'#campos');
+  flash('success','Pregunta eliminada. Las respuestas históricas se conservaron.');redirect('/admin/formulario/editar?id='.$formId.'#campos');
+ }
+
+ function deletePublicForm():void {
+  $this->admin();verify_csrf();$formId=(int)($_POST['id']??0);$forms=new PublicForm;
+  try{$assets=$forms->deleteForm($formId);}catch(\Throwable){flash('error','No fue posible eliminar el formulario. Inténtalo nuevamente.');redirect('/admin/formulario');}
+  if(!$assets){flash('error','El formulario seleccionado no existe.');redirect('/admin/formulario');}
+  if($assets['cover']!=='')$this->deleteFormCover($assets['cover']);
+  foreach($assets['files'] as $file)$this->deleteSubmissionFile($file);
+  flash('success','Formulario eliminado junto con sus preguntas y respuestas.');redirect('/admin/formulario');
  }
 
  function downloadFormFile():void {
@@ -196,5 +205,6 @@ class AdminController extends Controller {
   return $name;
  }
  private function deleteFormCover(string $name):void{$path=rtrim(config('form_cover_dir'),'/').'/'.basename($name);if(is_file($path))@unlink($path);}
+ private function deleteSubmissionFile(string $name):void{$path=rtrim(config('form_upload_dir'),'/').'/'.basename($name);if(is_file($path))@unlink($path);}
  private function temporaryPassword():string{return 'RD-'.strtoupper(bin2hex(random_bytes(5)));}
 }

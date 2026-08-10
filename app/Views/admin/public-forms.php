@@ -22,7 +22,7 @@
     <div class="form-manager-content"><span><b><?=$form['field_count']?></b> preguntas</span><small><?=$form['active_field_count']?> visibles</small></div>
     <div class="form-manager-responses"><strong><?=$form['submission_count']?></strong><span>recibidas</span></div>
     <span class="status-chip <?=$form['status']==='open'?'is-open':'is-closed'?>"><?=$form['status']==='open'?'Abierto':'Cerrado'?></span>
-    <div class="form-manager-actions"><a href="<?=url('/admin/formulario/editar?id='.$form['id'])?>">Configurar formulario</a><a href="<?=url('/admin/formulario/editar?id='.$form['id'].'#respuestas')?>"><?=$form['submission_count']?> respuestas →</a><a href="<?=url($publicUrl)?>" target="_blank" rel="noopener noreferrer">Vista pública ↗</a></div>
+    <div class="form-manager-actions"><a href="<?=url('/admin/formulario/editar?id='.$form['id'])?>">Configurar formulario</a><a href="<?=url('/admin/formulario/editar?id='.$form['id'].'#respuestas')?>"><?=$form['submission_count']?> respuestas →</a><a href="<?=url($publicUrl)?>" target="_blank" rel="noopener noreferrer">Vista pública ↗</a><form class="form-manager-delete" method="post" action="<?=url('/admin/formulario/eliminar')?>" onsubmit="return confirm('¿Eliminar este formulario? También se eliminarán todas sus preguntas, respuestas y archivos. Esta acción no se puede deshacer.')"><?=csrf_field()?><input type="hidden" name="id" value="<?=$form['id']?>"><button type="submit">Eliminar formulario</button></form></div>
    </article>
   <?php endforeach;?>
  </section>

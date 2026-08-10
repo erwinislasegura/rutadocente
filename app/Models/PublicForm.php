@@ -83,6 +83,26 @@ class PublicForm extends BaseModel {
 
     public function deleteField(int $id,int $formId):void {$this->ensureSchema();$stmt=$this->db()->prepare('DELETE FROM public_form_fields WHERE id=? AND form_id=?');$stmt->execute([$id,$formId]);}
 
+    public function deleteForm(int $formId):array {
+        $this->ensureSchema();$settings=$this->settings($formId);if(!$settings)return [];
+        $stmt=$this->db()->prepare('SELECT answers_json FROM public_form_submissions WHERE form_id=?');$stmt->execute([$formId]);$files=[];
+        foreach($stmt->fetchAll() as $submission){
+            $answers=json_decode((string)$submission['answers_json'],true);
+            if(!is_array($answers))continue;
+            foreach($answers as $answer){
+                $value=$answer['value']??null;
+                if(($answer['type']??'')==='file'&&is_array($value)&&!empty($value['stored']))$files[]=basename((string)$value['stored']);
+            }
+        }
+        $db=$this->db();$db->beginTransaction();
+        try{
+            foreach(['public_form_submissions','public_form_fields'] as $table){$delete=$db->prepare("DELETE FROM {$table} WHERE form_id=?");$delete->execute([$formId]);}
+            $delete=$db->prepare('DELETE FROM public_form_settings WHERE id=?');$delete->execute([$formId]);
+            $db->commit();
+        }catch(\Throwable $error){if($db->inTransaction())$db->rollBack();throw $error;}
+        return ['cover'=>(string)($settings['cover_image']??''),'files'=>array_values(array_unique($files))];
+    }
+
     public function submissions(int $formId=1,int $limit=100):array {
         $this->ensureSchema();$limit=max(1,min(250,$limit));
         $stmt=$this->db()->prepare("SELECT * FROM public_form_submissions WHERE form_id=? ORDER BY created_at DESC,id DESC LIMIT {$limit}");
