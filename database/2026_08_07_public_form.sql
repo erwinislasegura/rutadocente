@@ -1,6 +1,6 @@
 -- Módulo de formulario público y recepción de comprobantes.
 -- Ejecutar una vez sobre una instalación existente de Ruta Docente.
-USE rutadocente;
+-- La migración usa la base de datos seleccionada en phpMyAdmin.
 
 CREATE TABLE IF NOT EXISTS public_form_settings(
  id TINYINT UNSIGNED PRIMARY KEY,

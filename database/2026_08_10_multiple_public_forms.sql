@@ -1,5 +1,5 @@
 -- Convierte el formulario público único en un gestor de múltiples formularios.
-USE rutadocente;
+-- Ejecutar dentro de la base de datos seleccionada en phpMyAdmin.
 
 ALTER TABLE public_form_settings
  MODIFY id INT UNSIGNED NOT NULL AUTO_INCREMENT,

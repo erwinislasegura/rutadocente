@@ -1,6 +1,6 @@
 -- Configuración central de Google Analytics 4.
 -- La aplicación también crea esta tabla automáticamente al abrir el módulo.
-USE rutadocente;
+-- La migración usa la base de datos seleccionada en phpMyAdmin.
 CREATE TABLE IF NOT EXISTS site_settings(
  setting_key VARCHAR(80) PRIMARY KEY,
  setting_value TEXT NOT NULL,
