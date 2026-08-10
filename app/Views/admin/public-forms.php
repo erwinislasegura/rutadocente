@@ -16,9 +16,9 @@
  <?php if(!$forms):?><section class="admin-resource-empty"><span>F</span><h3>Aún no existen formularios.</h3><p>Crea el primero para comenzar a recibir información.</p></section><?php else:?>
  <section class="forms-manager-list">
   <div class="forms-manager-list-head"><span>Formulario</span><span>Contenido</span><span>Respuestas</span><span>Estado</span><span>Acciones</span></div>
-  <?php foreach($forms as $form):$publicUrl='/inscripcion'.($form['slug']==='inscripcion'?'':'?form='.rawurlencode($form['slug']));?>
+  <?php foreach($forms as $form):$publicUrl='/inscripcion?form='.rawurlencode($form['slug']);?>
    <article class="forms-manager-row">
-    <div class="form-manager-identity"><span>F</span><div><strong><?=e($form['name']?:$form['title'])?></strong><small><?=e($form['title'])?></small><a href="<?=url($publicUrl)?>" target="_blank" rel="noopener noreferrer"><?=e($publicUrl)?> ↗</a></div></div>
+    <div class="form-manager-identity"><?php if(!empty($form['cover_image'])):?><img src="<?=url('/formulario/portada?id='.$form['id'].'&v='.urlencode($form['updated_at']))?>" alt="Portada de <?=e($form['name'])?>"><?php else:?><span>F</span><?php endif;?><div><strong><?=e($form['name']?:$form['title'])?></strong><small><?=e($form['title'])?></small><a href="<?=url($publicUrl)?>" target="_blank" rel="noopener noreferrer"><?=e($publicUrl)?> ↗</a></div></div>
     <div class="form-manager-content"><span><b><?=$form['field_count']?></b> preguntas</span><small><?=$form['active_field_count']?> visibles</small></div>
     <div class="form-manager-responses"><strong><?=$form['submission_count']?></strong><span>recibidas</span></div>
     <span class="status-chip <?=$form['status']==='open'?'is-open':'is-closed'?>"><?=$form['status']==='open'?'Abierto':'Cerrado'?></span>

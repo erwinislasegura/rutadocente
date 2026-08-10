@@ -93,10 +93,19 @@ class AdminController extends Controller {
   $this->admin();verify_csrf();$formId=(int)($_POST['form_id']??1);
   $name=$this->clean($_POST['name']??'',160);
   if($name===''){flash('error','El nombre interno del formulario es obligatorio.');redirect('/admin/formulario/editar?id='.$formId.'#informacion');}
+  $forms=new PublicForm;$existing=$forms->settings($formId);if(!$existing){http_response_code(404);exit('Formulario no encontrado');}
+  $cover=(string)($existing['cover_image']??'');$oldCover='';
+  if(isset($_POST['remove_cover'])&&$cover!==''){$oldCover=$cover;$cover='';}
+  if(!empty($_FILES['cover_image']['name'])){
+   try{$newCover=$this->storeFormCover($_FILES['cover_image']);}catch(\InvalidArgumentException $error){flash('error',$error->getMessage());redirect('/admin/formulario/editar?id='.$formId.'#informacion');}
+   if(!empty($existing['cover_image'])){$oldCover=(string)$existing['cover_image'];}
+   $cover=$newCover;
+  }
   $status=in_array($_POST['status']??'closed',['open','closed'],true)?$_POST['status']:'closed';
-  (new PublicForm)->saveInformation([
+  $forms->saveInformation([
    'name'=>$name,
    'slug'=>$formId===1?'inscripcion':$this->clean($_POST['slug']??'',120),
+   'cover_image'=>$cover?:null,
    'eyebrow'=>$this->clean($_POST['eyebrow']??'',80),
    'title'=>$this->clean($_POST['title']??'',180),
    'intro'=>$this->clean($_POST['intro']??'',3000),
@@ -108,6 +117,7 @@ class AdminController extends Controller {
    'success_message'=>$this->clean($_POST['success_message']??'',2000),
    'consent_text'=>$this->clean($_POST['consent_text']??'',1000),
   ],$formId);
+  if($oldCover!==''&&$oldCover!==$cover)$this->deleteFormCover($oldCover);
   flash('success','Información del formulario actualizada.');redirect('/admin/formulario/editar?id='.$formId.'#informacion');
  }
 
@@ -174,5 +184,17 @@ class AdminController extends Controller {
   $value=trim((string)$value);
   return function_exists('mb_substr')?mb_substr($value,0,$max):substr($value,0,$max);
  }
+ private function storeFormCover(array $file):string {
+  if(($file['error']??UPLOAD_ERR_NO_FILE)!==UPLOAD_ERR_OK)throw new \InvalidArgumentException('No fue posible recibir la imagen de portada.');
+  if(($file['size']??0)>config('form_cover_max_mb')*1048576)throw new \InvalidArgumentException('La portada no puede superar '.config('form_cover_max_mb').' MB.');
+  $mime=class_exists('finfo')?(new \finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']):($file['type']??'');
+  $extensions=['image/jpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp'];
+  if(!isset($extensions[$mime]))throw new \InvalidArgumentException('La portada debe ser JPG, PNG o WebP.');
+  $directory=config('form_cover_dir');if(!is_dir($directory)&&!mkdir($directory,0755,true)&&!is_dir($directory))throw new \InvalidArgumentException('No fue posible preparar la carpeta de portadas.');
+  $name=bin2hex(random_bytes(18)).'.'.$extensions[$mime];
+  if(!move_uploaded_file($file['tmp_name'],$directory.'/'.$name))throw new \InvalidArgumentException('No fue posible guardar la imagen de portada.');
+  return $name;
+ }
+ private function deleteFormCover(string $name):void{$path=rtrim(config('form_cover_dir'),'/').'/'.basename($name);if(is_file($path))@unlink($path);}
  private function temporaryPassword():string{return 'RD-'.strtoupper(bin2hex(random_bytes(5)));}
 }

@@ -15,7 +15,7 @@ $r->get('/recursos',[PublicController::class,'recursos']);
 $r->get('/contacto',[PublicController::class,'contacto']);
 $r->get('/preguntas-frecuentes',[PublicController::class,'preguntasFrecuentes']);
 $r->get('/sitemap.xml',[PublicController::class,'sitemap']); $r->get('/robots.txt',[PublicController::class,'robots']);
-$r->get('/inscripcion',[PublicController::class,'registration']); $r->post('/inscripcion',[PublicController::class,'submitRegistration']);
+$r->get('/inscripcion',[PublicController::class,'registration']); $r->post('/inscripcion',[PublicController::class,'submitRegistration']); $r->get('/formulario/portada',[PublicController::class,'formCover']);
 $r->get('/login',[AuthController::class,'show']); $r->post('/login',[AuthController::class,'login']); $r->post('/logout',[AuthController::class,'logout']);
 $r->get('/admin',[AdminController::class,'dashboard']);
 $r->get('/admin/usuarios',[AdminController::class,'users']); $r->get('/admin/usuarios/formulario',[AdminController::class,'userForm']); $r->get('/admin/usuarios/ver',[AdminController::class,'userView']); $r->post('/admin/usuarios/guardar',[AdminController::class,'saveUser']); $r->post('/admin/usuarios/enviar-registro',[AdminController::class,'sendUserRegistration']); $r->post('/admin/usuarios/eliminar',[AdminController::class,'deleteUser']);

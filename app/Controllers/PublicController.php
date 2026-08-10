@@ -16,7 +16,7 @@ class PublicController extends Controller {
 
  function sitemap():void {
   $pages=['/'=>['1.0','weekly'],'/portafolio'=>['0.9','weekly'],'/recursos'=>['0.9','weekly'],'/tests'=>['0.8','weekly'],'/tabuladores'=>['0.8','weekly'],'/clases-asincronicas'=>['0.8','weekly'],'/asignaturas'=>['0.8','weekly'],'/inscripcion'=>['0.7','weekly'],'/preguntas-frecuentes'=>['0.6','monthly'],'/contacto'=>['0.6','monthly']];
-  foreach((new PublicForm)->forms() as $form)if($form['status']==='open'&&$form['slug']!=='inscripcion')$pages['/inscripcion?form='.rawurlencode($form['slug'])]=['0.6','weekly'];
+  foreach((new PublicForm)->forms() as $form)if($form['status']==='open')$pages['/inscripcion?form='.rawurlencode($form['slug'])]=['0.6','weekly'];
   header('Content-Type: application/xml; charset=UTF-8');
   echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
   foreach($pages as $path=>$meta)echo ' <url><loc>'.e(absolute_url($path)).'</loc><lastmod>2026-08-08</lastmod><changefreq>'.$meta[1].'</changefreq><priority>'.$meta[0].'</priority></url>' . "\n";
@@ -30,6 +30,10 @@ class PublicController extends Controller {
 
  function registration():void {
   $form=new PublicForm;
+  if(trim((string)($_GET['form']??''))===''){
+   $forms=array_values(array_filter($form->forms(),fn($item)=>$item['status']==='open'));
+   $this->publicPage('workshops',compact('forms'));return;
+  }
   $settings=$this->requestedForm($form);if(!$settings){http_response_code(404);exit('Formulario no encontrado');}
   $formId=(int)$settings['id'];$stateKey='_public_form_'.$formId;
   $errors=$_SESSION[$stateKey.'_errors']??[];
@@ -139,11 +143,20 @@ class PublicController extends Controller {
 
  private function requestedForm(PublicForm $form):array {
   $slug=trim((string)($_GET['form']??''));
-  return $slug!==''?$form->settingsBySlug($slug):$form->settings(1);
+  return $slug!==''?$form->settingsBySlug($slug):[];
  }
 
  private function publicFormPath(array $settings):string {
-  return '/inscripcion'.(($settings['slug']??'inscripcion')==='inscripcion'?'':'?form='.rawurlencode((string)$settings['slug']));
+  return '/inscripcion?form='.rawurlencode((string)$settings['slug']);
+ }
+
+ function formCover():void {
+  $settings=(new PublicForm)->settings((int)($_GET['id']??0));$stored=basename((string)($settings['cover_image']??''));
+  $path=rtrim(config('form_cover_dir'),'/').'/'.$stored;
+  if($stored===''||!is_file($path)){http_response_code(404);exit;}
+  $mime=class_exists('finfo')?(new \finfo(FILEINFO_MIME_TYPE))->file($path):'application/octet-stream';
+  if(!in_array($mime,['image/jpeg','image/png','image/webp'],true)){http_response_code(415);exit;}
+  header('Content-Type: '.$mime);header('Content-Length: '.filesize($path));header('Cache-Control: public, max-age=86400');readfile($path);exit;
  }
 
  private function formUpload(int $id):array {

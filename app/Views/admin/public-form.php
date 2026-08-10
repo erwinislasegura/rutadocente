@@ -6,7 +6,7 @@ $fieldTypes=[
 ];
 $current=$editingField??[];
 $activeFields=count(array_filter($fields,fn($field)=>!empty($field['active'])));
-$publicUrl='/inscripcion'.($settings['slug']==='inscripcion'?'':'?form='.rawurlencode($settings['slug']));
+$publicUrl='/inscripcion?form='.rawurlencode($settings['slug']);
 ?>
 <main class="content container-fluid public-form-admin">
  <div class="page-toolbar"><a class="btn btn-outline-secondary" href="<?=url('/admin/formulario')?>">← Volver a formularios</a></div>
@@ -28,10 +28,11 @@ $publicUrl='/inscripcion'.($settings['slug']==='inscripcion'?'':'?form='.rawurle
  <section class="card panel-card form-config-card" id="informacion">
   <div class="card-body p-4 p-xl-5">
    <div class="config-heading"><div><span>01</span><div><h2>Información del formulario</h2><p>Textos principales, disponibilidad y mensaje de confirmación.</p></div></div><span class="status-chip <?=$settings['status']==='open'?'is-open':'is-closed'?>"><?=$settings['status']==='open'?'Recibiendo respuestas':'Formulario cerrado'?></span></div>
-   <form method="post" action="<?=url('/admin/formulario/informacion')?>"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>">
+   <form method="post" enctype="multipart/form-data" action="<?=url('/admin/formulario/informacion')?>"><?=csrf_field()?><input type="hidden" name="form_id" value="<?=$formId?>">
     <div class="row g-4">
      <div class="col-md-6"><label class="form-label">Nombre interno</label><input class="form-control" name="name" maxlength="160" required value="<?=e($settings['name'])?>"></div>
-     <div class="col-md-6"><label class="form-label">Identificador de URL <?=$formId===1?'<span class="text-secondary fw-normal">(formulario principal)</span>':''?></label><div class="form-slug-input"><i><?=$formId===1?'/':'/inscripcion?form='?></i><input class="form-control" name="slug" maxlength="120" required value="<?=e($settings['slug'])?>" <?=$formId===1?'readonly':''?>></div></div>
+     <div class="col-md-6"><label class="form-label">Identificador de URL <?=$formId===1?'<span class="text-secondary fw-normal">(formulario principal)</span>':''?></label><div class="form-slug-input"><i>/inscripcion?form=</i><input class="form-control" name="slug" maxlength="120" required value="<?=e($settings['slug'])?>" <?=$formId===1?'readonly':''?>></div></div>
+     <div class="col-12"><div class="form-cover-admin"><div class="form-cover-preview"><?php if(!empty($settings['cover_image'])):?><img src="<?=url('/formulario/portada?id='.$formId.'&v='.urlencode($settings['updated_at']))?>" alt="Portada actual de <?=e($settings['name'])?>"><?php else:?><span>IMAGEN DE PORTADA</span><?php endif;?></div><div><label class="form-label" for="cover_image">Foto de portada</label><input class="form-control" id="cover_image" type="file" name="cover_image" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WebP · máximo <?=e(config('form_cover_max_mb'))?> MB · formato recomendado 16:9.</small><?php if(!empty($settings['cover_image'])):?><label class="form-cover-remove"><input type="checkbox" name="remove_cover" value="1"> Quitar la portada actual</label><?php endif;?></div></div></div>
      <div class="col-md-4"><label class="form-label">Texto superior</label><input class="form-control" name="eyebrow" maxlength="80" value="<?=e($settings['eyebrow'])?>"></div>
      <div class="col-md-8"><label class="form-label">Título</label><input class="form-control" name="title" maxlength="180" required value="<?=e($settings['title'])?>"></div>
      <div class="col-12"><label class="form-label">Presentación</label><textarea class="form-control" name="intro" rows="4"><?=e($settings['intro'])?></textarea></div>

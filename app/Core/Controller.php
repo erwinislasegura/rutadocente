@@ -37,6 +37,7 @@ class Controller {
    'contacto'=>['Orientación para docentes y Portafolio 2026 | Contacto','Contacta a Ruta Docente para recibir orientación sobre Portafolio Docente 2026, clases asincrónicas, tests, tabuladores y recursos.','/contacto','Contacto'],
    'preguntas-frecuentes'=>['Preguntas frecuentes sobre Ruta Docente 2026','Respuestas sobre acceso, asignaturas, tests, tabuladores, recursos, dispositivos compatibles y soporte de Ruta Docente.','/preguntas-frecuentes','Preguntas frecuentes'],
    'inscripcion'=>['Inscripción a talleres para docentes | Ruta Docente','Formulario de inscripción a talleres y actividades de preparación para docentes. Revisa la información, completa tus datos y reserva tu cupo.','/inscripcion','Inscripción'],
+   'workshops'=>['Talleres disponibles para docentes | Ruta Docente','Explora talleres y actividades disponibles para docentes. Revisa cada programa y completa tu inscripción en línea.','/inscripcion','Talleres disponibles'],
   ];
   $seo=$pages[$view]??$pages['home'];
   if($view==='inscripcion'&&!empty($_GET['form'])){

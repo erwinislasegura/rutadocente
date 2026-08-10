@@ -36,9 +36,9 @@ class PublicForm extends BaseModel {
     public function saveInformation(array $data,int $formId):void {
         $this->ensureSchema();
         $slug=$this->uniqueSlug($data['slug']?:$data['name'],$formId);
-        $sql='UPDATE public_form_settings SET name=?,slug=?,eyebrow=?,title=?,intro=?,information_title=?,information_body=?,status=?,submit_label=?,success_title=?,success_message=?,consent_text=? WHERE id=?';
+        $sql='UPDATE public_form_settings SET name=?,slug=?,cover_image=?,eyebrow=?,title=?,intro=?,information_title=?,information_body=?,status=?,submit_label=?,success_title=?,success_message=?,consent_text=? WHERE id=?';
         $this->db()->prepare($sql)->execute([
-            $data['name'],$slug,$data['eyebrow'],$data['title'],$data['intro'],$data['information_title'],$data['information_body'],
+            $data['name'],$slug,$data['cover_image'],$data['eyebrow'],$data['title'],$data['intro'],$data['information_title'],$data['information_body'],
             $data['status'],$data['submit_label'],$data['success_title'],$data['success_message'],$data['consent_text'],$formId,
         ]);
     }
@@ -113,6 +113,7 @@ class PublicForm extends BaseModel {
         $columns=array_column($settingsColumns,'Field');
         if(!in_array('name',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN name VARCHAR(160) NULL AFTER id");
         if(!in_array('slug',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN slug VARCHAR(120) NULL AFTER name");
+        if(!in_array('cover_image',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN cover_image VARCHAR(255) NULL AFTER slug");
         if(!in_array('created_at',$columns,true))$db->exec("ALTER TABLE public_form_settings ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP BEFORE updated_at");
         $idColumn=current(array_filter($settingsColumns,fn($column)=>$column['Field']==='id'))?:[];
         if(!preg_match('/^int(?:\(\d+\))? unsigned$/',strtolower((string)($idColumn['Type']??'')))||!str_contains(strtolower((string)($idColumn['Extra']??'')),'auto_increment'))$db->exec("ALTER TABLE public_form_settings MODIFY id INT UNSIGNED NOT NULL AUTO_INCREMENT");

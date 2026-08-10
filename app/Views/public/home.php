@@ -37,7 +37,7 @@
             <a href="<?=url('/tests')?>">Tus test</a>
             <a href="<?=url('/tabuladores')?>">Tabuladores</a>
             <a href="<?=url('/recursos')?>">Recursos</a>
-            <a href="<?=url('/inscripcion')?>">Inscripción</a>
+            <a href="<?=url('/inscripcion')?>">Talleres disponibles</a>
             <a href="<?=url('/contacto')?>">Contacto</a>
             <a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a>
         </nav>
@@ -190,7 +190,7 @@
         <div>
             <h3>Ayuda</h3>
             <a href="<?=url('/recursos')?>">Recursos</a>
-            <a href="<?=url('/inscripcion')?>">Inscripción</a>
+            <a href="<?=url('/inscripcion')?>">Talleres disponibles</a>
             <a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a>
             <a href="<?=url('/contacto')?>">Contacto</a>
         </div>
