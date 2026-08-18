@@ -35,7 +35,7 @@
             <a href="<?=url('/portafolio')?>">Portafolio</a>
             <a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a>
             <a href="<?=url('/tests')?>">Tus test</a>
-            <a href="<?=url('/tabuladores')?>">Tabuladores</a>
+            <a href="<?=url('/talleres-asincronicos')?>">Talleres asincrónicos</a>
             <a href="<?=url('/recursos')?>">Recursos</a>
             <a href="<?=url('/inscripcion')?>">Talleres disponibles</a>
             <a href="<?=url('/contacto')?>">Contacto</a>
@@ -90,8 +90,8 @@
                 </article>
                 <article class="access-card access-card-tabs">
                     <span class="access-card-icon" aria-hidden="true">▦</span>
-                    <div><small>ANÁLISIS PEDAGÓGICO</small><h3>Tabuladores</h3><p>Descarga plantillas o utiliza herramientas en línea para analizar tus resultados.</p></div>
-                    <a href="<?=url('/login')?>">Abrir mis tabuladores <span>→</span></a>
+                    <div><small>ANÁLISIS PEDAGÓGICO</small><h3>Talleres asincrónicos</h3><p>Descarga plantillas o utiliza herramientas en línea para analizar tus resultados.</p></div>
+                    <a href="<?=url('/login')?>">Abrir mis talleres asincrónicos <span>→</span></a>
                 </article>
                 <article class="access-card access-card-workshops">
                     <span class="access-card-icon" aria-hidden="true">★</span>
@@ -130,7 +130,7 @@
                 </article>
                 <article class="card">
                     <span class="icon">▦</span>
-                    <h3>Tabuladores</h3>
+                    <h3>Talleres asincrónicos</h3>
                     <p>Organiza resultados y visualiza avances de forma clara y accionable.</p>
                     <a class="static-card-link" href="<?=url('/contacto')?>">Conocer más →</a>
                 </article>
