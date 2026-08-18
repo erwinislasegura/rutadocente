@@ -3,7 +3,7 @@ $currentPublicPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: 
 ?>
 <div class="topbar">
     <div class="container">
-        <span class="topbar-message"><i></i>Acompañamiento docente para todo Chile</span>
+        <span class="topbar-message">Acompañamiento docente para todo Chile</span>
         <div class="topbar-contact">
             <a href="mailto:aulaentretenida0@gmail.com">✉ aulaentretenida0@gmail.com</a>
             <a href="tel:+56975778434">☎ +56 9 7577 8434</a>

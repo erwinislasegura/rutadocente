@@ -1436,3 +1436,101 @@ main>.static-hero~.section .faq-grid>div:first-child h2,
  .home-hero .hero-grid{padding:42px 0}
 }
 
+/* =========================================================
+   MENÚ PÚBLICO V6B · NAVEGACIÓN SOBRIA Y PROFESIONAL
+   ========================================================= */
+.topbar-message i{display:none}
+.site-header{
+ height:92px;border-bottom:1px solid #dce6f0;
+ box-shadow:0 5px 20px rgba(8,38,80,.045)
+}
+.site-header .header-inner{
+ width:min(1380px,calc(100% - 40px));gap:18px
+}
+.site-header .brand{
+ width:180px;min-width:180px;height:76px;flex-basis:180px
+}
+.site-header .brand>img{width:174px;height:74px}
+.site-nav{align-self:stretch;gap:4px}
+.site-nav>a,.nav-dropdown-toggle{
+ position:relative;min-height:100%;padding:0 8px;
+ border:0!important;border-radius:0;background:transparent!important;
+ box-shadow:none!important;color:#304b6a;font-size:13px;font-weight:700;
+ letter-spacing:-.01em
+}
+.site-nav>a:hover,.site-nav>a.active,
+.nav-dropdown-toggle:hover,.nav-dropdown-toggle.active{
+ color:var(--blue);background:transparent!important;
+ border:0!important;box-shadow:none!important
+}
+/* Elimina definitivamente el antiguo punto amarillo */
+.site-header nav a.active:after,
+.site-header .site-nav a.active:after{display:none!important}
+.site-nav>a.active:before,
+.nav-dropdown-toggle.active:before{
+ content:"";position:absolute;left:8px;right:8px;bottom:0;
+ height:2px;border-radius:2px;background:var(--blue)
+}
+.nav-dropdown-toggle{gap:5px}
+.nav-dropdown-toggle>span{color:#6f8299;font-size:12px}
+.nav-dropdown-menu{
+ top:calc(100% + 1px);width:330px;padding:9px;
+ border:1px solid #d9e4ef;border-radius:14px;
+ box-shadow:0 20px 48px rgba(8,38,80,.14)
+}
+.nav-dropdown-menu:before{display:none}
+.nav-dropdown-menu a{
+ padding:13px 14px;border-radius:9px;
+ transition:background .18s ease,transform .18s ease
+}
+.nav-dropdown-menu a:hover{
+ background:#f1f6fb;transform:translateX(2px)
+}
+.nav-dropdown-menu b{font-size:13px}
+.nav-dropdown-menu small{font-size:11px}
+.site-header .header-cta{
+ min-height:44px;padding:0 15px;border:0;border-radius:10px;
+ background:var(--blue);box-shadow:none;font-size:12.5px
+}
+.site-header .header-cta:hover{
+ color:#fff;background:var(--blue-dark);box-shadow:0 8px 20px rgba(8,38,80,.15)
+}
+
+@media(max-width:1240px){
+ .site-header .header-inner{width:min(100% - 32px,1200px);gap:10px}
+ .site-header .brand{width:164px;min-width:164px;flex-basis:164px}
+ .site-header .brand>img{width:160px;height:70px}
+ .site-nav>a,.nav-dropdown-toggle{padding:0 6px;font-size:12px}
+ .site-nav>a.active:before,.nav-dropdown-toggle.active:before{left:6px;right:6px}
+}
+
+@media(max-width:1100px){
+ .site-header{height:80px}
+ .site-header .header-inner{width:min(100% - 30px,900px)}
+ .site-header .brand{
+  width:158px;min-width:158px;height:68px;flex-basis:158px
+ }
+ .site-header .brand>img{width:152px;height:66px}
+ .site-nav{align-self:auto}
+ .site-nav>a,.nav-dropdown-toggle{
+  min-height:50px;padding:0 15px;border-radius:10px!important;
+  background:#fff!important;font-size:14px
+ }
+ .site-nav>a:hover,.site-nav>a.active,
+ .nav-dropdown-toggle:hover,.nav-dropdown-toggle.active{
+  background:#eef5fc!important
+ }
+ .site-nav>a.active:before,.nav-dropdown-toggle.active:before{display:none}
+ .nav-dropdown-menu{top:auto}
+ .nav-dropdown-menu a:hover{transform:none}
+}
+
+@media(max-width:720px){
+ .site-header{height:76px}
+ .site-header .header-inner{width:calc(100% - 26px)}
+ .site-header .brand{
+  width:150px;min-width:150px;height:66px;flex-basis:150px
+ }
+ .site-header .brand>img{width:145px;height:64px}
+}
+
