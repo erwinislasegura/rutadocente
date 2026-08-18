@@ -1068,3 +1068,139 @@ main small{font-size:12px}
  .footer-cta p{font-size:15px!important}
  .site-footer .footer-brand-column>p,.site-footer .footer-grid>div:not(:first-child)>a{font-size:14px}
 }
+
+
+/* =========================================================
+   SISTEMA VISUAL PÚBLICO V5 · LOGO COMPLETO Y HERO FOTOGRÁFICO
+   ========================================================= */
+
+/* Logo horizontal completo: sin máscara circular ni texto duplicado */
+.site-header{height:104px}
+.site-header .brand{width:210px;min-width:210px;height:88px;gap:0}
+.site-header .brand>img{
+ width:190px;height:84px;border-radius:0;object-fit:contain;background:transparent;
+ box-shadow:none;filter:none
+}
+.site-header .brand>div{display:none}
+.site-header .header-inner{gap:28px}
+.site-footer .brand{width:210px;min-width:210px}
+.site-footer .brand>img{width:190px;height:94px;border-radius:0;object-fit:contain;background:#fff;box-shadow:none}
+.site-footer .brand>div{display:none}
+
+/* Patrón de portada común */
+.home-hero,.static-hero,.registration-hero,.workshops-hero{
+ position:relative;isolation:isolate;overflow:hidden;color:#fff;background:#082650
+}
+.home-hero:before{display:none}
+.static-hero:after,.registration-hero:before,.workshops-hero:before{
+ content:"";display:block;position:absolute;inset:0;z-index:1;background:rgba(4,25,57,.72);pointer-events:none
+}
+.static-hero .wrap,.registration-hero-grid,.workshops-hero-grid{
+ position:relative;z-index:2;min-height:570px;padding:82px 0;display:flex;align-items:center
+}
+.static-hero .wrap>div:first-child,.registration-hero-grid>div:first-child,.workshops-hero-grid>div:first-child{
+ position:relative;z-index:3;width:min(760px,68%);max-width:760px
+}
+.static-hero .wrap>img{
+ position:absolute;left:50%;top:0;z-index:-1;width:100vw;max-width:none;height:100%;
+ transform:translateX(-50%);object-fit:cover;border-radius:0;box-shadow:none
+}
+.tests-static-hero .hero-image-frame{
+ position:absolute;left:50%;top:0;z-index:-1;width:100vw;height:100%;transform:translateX(-50%);
+ border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden
+}
+.tests-static-hero .hero-image-frame img{width:100%;height:100%;object-fit:cover;border-radius:0}
+.tests-static-hero .hero-image-frame>span{display:none}
+.static-hero h1,.registration-hero h1,.workshops-hero h1{
+ max-width:800px;color:#fff;text-shadow:0 3px 22px rgba(0,0,0,.25)
+}
+.static-hero p,.registration-hero p,.workshops-hero p{
+ max-width:700px;color:#eef5fc!important;text-shadow:0 2px 12px rgba(0,0,0,.2)
+}
+.static-hero .eyebrow,.registration-hero .eyebrow.pale,.workshops-hero .eyebrow.pale{color:#ffd36c}
+.static-hero .eyebrow:before,.registration-hero .eyebrow:before,.workshops-hero .eyebrow:before{background:#f0ad24}
+.static-hero .actions,.registration-hero .actions,.workshops-hero .actions{margin-bottom:0}
+.static-hero .btn,.registration-hero .btn,.workshops-hero .btn{
+ color:var(--ink);background:#fff;border-color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.16)
+}
+.static-hero .btn:hover,.registration-hero .btn:hover,.workshops-hero .btn:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
+.static-hero .text-link,.registration-hero .text-link,.workshops-hero .text-link{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
+
+/* Inicio con fotografía a pantalla completa */
+.home-hero{min-height:700px}
+.home-hero .hero-grid{
+ position:relative;min-height:700px;display:flex;align-items:center;padding:86px 0
+}
+.home-hero .hero-copy{position:relative;z-index:3;width:min(760px,68%);max-width:760px}
+.home-hero .hero-visual{
+ position:absolute;left:50%;top:0;z-index:0;width:100vw;height:100%;transform:translateX(-50%)
+}
+.home-hero .hero-visual>img{
+ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;filter:none
+}
+.home-hero .hero-visual:after{
+ content:"";position:absolute;inset:0;z-index:1;background:rgba(4,25,57,.72)
+}
+.home-hero .hero-quality-seal,.home-hero .float-card{display:none}
+.home-hero .hero-copy h1{color:#fff;text-shadow:0 3px 22px rgba(0,0,0,.25)}
+.home-hero .hero-copy h1 em{color:#ffd36c;font-style:normal}
+.home-hero .hero-copy>p{color:#eef5fc!important;text-shadow:0 2px 12px rgba(0,0,0,.2)}
+.home-hero .hero-copy .eyebrow{color:#ffd36c}
+.home-hero .hero-copy .eyebrow:before{background:#f0ad24}
+.home-hero .hero-copy .btn{color:var(--ink);background:#fff;border-color:#fff}
+.home-hero .hero-copy .btn:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
+.home-hero .hero-copy .text-link{color:#fff;border-bottom-color:rgba(255,255,255,.7)}
+.home-hero .trust{border-top-color:rgba(255,255,255,.28)}
+.home-hero .trust div{border-right-color:rgba(255,255,255,.25)}
+.home-hero .trust b{color:#fff}
+.home-hero .trust span{color:#dce9f6}
+
+/* Portadas fotográficas de páginas sin imagen en el HTML */
+.registration-hero{
+ background-image:url("https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1900&q=86");
+ background-size:cover;background-position:center
+}
+.workshops-hero{
+ background-image:url("https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1900&q=86");
+ background-size:cover;background-position:center
+}
+.registration-price,.workshops-hero-mark{
+ position:relative;z-index:3;margin-left:auto;color:#fff;background:rgba(5,34,75,.82);
+ border:1px solid rgba(255,255,255,.35);box-shadow:0 18px 45px rgba(0,0,0,.23);
+ backdrop-filter:blur(8px)
+}
+.registration-price small{color:#ffd36c}
+.registration-price strong,.workshops-hero-mark strong{color:#fff}
+.registration-price span,.workshops-hero-mark span{color:#e4eef8}
+.registration-meta span{color:#fff;background:rgba(5,34,75,.72);border-color:rgba(255,255,255,.35)}
+
+/* Mobile */
+@media(max-width:1180px){
+ .site-header .brand{width:180px;min-width:180px}
+ .site-header .brand>img{width:170px;height:78px}
+ .site-nav>a,.nav-dropdown-toggle{padding:0 9px;font-size:12.5px}
+}
+@media(max-width:980px){
+ .site-header{height:82px}
+ .site-header .brand{width:160px;min-width:160px;height:70px}
+ .site-header .brand>img{width:150px;height:68px}
+ .static-hero .wrap,.registration-hero-grid,.workshops-hero-grid,.home-hero .hero-grid{
+   min-height:580px;padding:68px 0
+ }
+ .static-hero .wrap>div:first-child,.registration-hero-grid>div:first-child,
+ .workshops-hero-grid>div:first-child,.home-hero .hero-copy{width:min(680px,88%)}
+ .registration-price,.workshops-hero-mark{position:absolute;right:0;bottom:42px;width:210px;min-height:120px;height:auto}
+}
+@media(max-width:620px){
+ .site-header{height:76px}
+ .site-header .brand{width:150px;min-width:150px;height:66px}
+ .site-header .brand>img{width:145px;height:64px}
+ .static-hero .wrap,.registration-hero-grid,.workshops-hero-grid,.home-hero .hero-grid{
+   min-height:610px;padding:62px 0
+ }
+ .static-hero .wrap>div:first-child,.registration-hero-grid>div:first-child,
+ .workshops-hero-grid>div:first-child,.home-hero .hero-copy{width:100%;max-width:none}
+ .static-hero:after,.registration-hero:before,.workshops-hero:before,.home-hero .hero-visual:after{background:rgba(4,25,57,.76)}
+ .registration-price,.workshops-hero-mark{position:relative;right:auto;bottom:auto;margin:28px 0 0;width:100%;min-height:120px}
+ .home-hero .trust{gap:6px}
+}

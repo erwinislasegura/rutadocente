@@ -18,7 +18,7 @@
     <div class="container footer-grid">
         <div class="footer-brand-column">
             <a class="brand light" href="<?=url('/')?>">
-                <img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Ruta Docente" width="60" height="60">
+                <img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Ruta Docente" width="190" height="94">
                 <div><strong>Ruta Docente</strong><small>Enseñar, avanzar, transformar.</small></div>
             </a>
             <p>Recursos claros y acompañamiento cercano para fortalecer tu práctica, tu portafolio y el aprendizaje de tus estudiantes.</p>
