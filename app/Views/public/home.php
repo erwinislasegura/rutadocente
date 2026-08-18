@@ -154,17 +154,17 @@
         </div>
     </section>
 
-    <section class="activaweb-credit" aria-labelledby="activaweb-title">
+    <section class="activaweb-credit" aria-labelledby="gocreative-title">
         <div class="container activaweb-credit-inner">
             <div class="activaweb-copy">
                 <span class="activaweb-kicker">COLABORADOR TECNOLÓGICO</span>
-                <h2 id="activaweb-title">Colaborador y desarrollado por <strong>Activa Web</strong></h2>
+                <h2 id="gocreative-title">Colaborador tecnológico y desarrollado por <strong>GoCreative</strong></h2>
                 <p>Soluciones web escalables que respaldan una experiencia digital clara, segura y preparada para crecer.</p>
             </div>
-            <a class="activaweb-logo" href="https://activa-web.cl/" target="_blank" rel="noopener" aria-label="Visitar Activa Web">
-                <img src="<?=url('/assets/img/activaweb-logo.png')?>" alt="Activa Web, soluciones web escalables para empresas">
+            <a class="activaweb-logo" href="https://gocreative.cl/" target="_blank" rel="noopener" aria-label="Visitar GoCreative">
+                <img src="<?=url('/assets/img/gocreative-logo.png')?>" alt="GoCreative, diseño y desarrollo digital">
             </a>
-            <a class="activaweb-link" href="https://activa-web.cl/" target="_blank" rel="noopener">Conocer Activa Web <span>↗</span></a>
+            <a class="activaweb-link" href="https://gocreative.cl/" target="_blank" rel="noopener">Conocer GoCreative <span>↗</span></a>
         </div>
     </section>
 </main>
