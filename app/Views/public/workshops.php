@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="Talleres, actividades y formularios de inscripción disponibles para docentes en Ruta Docente.">
  <title>Talleres disponibles | Ruta Docente</title>
- <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260818-public-v5')?>">
+ <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260818-public-v5b')?>">
  <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body class="workshops-page">
