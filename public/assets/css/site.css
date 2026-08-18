@@ -1534,3 +1534,7 @@ main>.static-hero~.section .faq-grid>div:first-child h2,
  .site-header .brand>img{width:145px;height:64px}
 }
 
+/* WHATSAPP V6C · EVITA DUPLICAR EL SVG REAL */
+.whatsapp::before{content:none!important;display:none!important}
+.whatsapp>img{display:block!important}
+
