@@ -836,3 +836,235 @@ input,textarea,select{border-radius:10px}
  .site-footer .footer-contact{grid-column:auto}
  .mobile-teacher-bar{left:10px;right:10px;bottom:8px;width:auto;border-radius:15px}
 }
+
+
+/* =========================================================
+   SISTEMA VISUAL PÚBLICO V4 · ESCALA Y CONSISTENCIA
+   ========================================================= */
+html{font-size:16px}
+body{font-size:16px}
+.container{width:min(1280px,calc(100% - 48px))}
+.site-header{height:92px}
+.site-header .header-inner{gap:30px}
+.site-header .brand{min-width:250px;gap:14px}
+.site-header .brand img{width:62px;height:62px}
+.site-header .brand strong{font-size:21px}
+.site-header .brand small{display:block;font-size:10px;margin-top:5px}
+.site-nav{gap:6px}
+.site-nav>a,.nav-dropdown-toggle{min-height:46px;padding:0 14px;font-size:13.5px;letter-spacing:-.01em}
+.site-header .header-cta{min-height:48px;padding:0 19px;font-size:13px}
+.nav-dropdown-menu{width:360px;padding:12px}
+.nav-dropdown-menu a{padding:13px 14px}
+.nav-dropdown-menu b{font-size:14px}
+.nav-dropdown-menu small{font-size:12px;line-height:1.4}
+.topbar{font-size:12.5px}
+.topbar .container{height:40px}
+.topbar-message{font-size:12px}
+.topbar-contact{gap:28px}
+
+/* Escala de lectura común */
+main p,
+.card p,
+.access-card p,
+.contact-info>p,
+.accordion article p,
+.registration-hero p,
+.workshops-hero p,
+.workshops-heading>p,
+.info-rich p,
+.registration-form-heading p{
+ font-size:15.5px!important;line-height:1.72!important
+}
+main .lead{font-size:17px!important}
+main .eyebrow,
+.access-hub-heading>div>span,
+.registration-meta span,
+.info-card>small,
+.bank-card-top small,
+.workshops-empty>span{font-size:11.5px!important}
+main .text-link,
+main .static-card-link,
+main .card>a,
+.workshop-card a{font-size:14px!important}
+main h3,.card h3{font-family:"Libre Franklin","DM Sans",Arial,sans-serif;font-size:21px;line-height:1.3}
+main small{font-size:12px}
+.btn{min-height:52px;padding:14px 24px;font-size:14px}
+.actions{gap:24px}
+
+/* Heroes interiores: misma estructura y lenguaje */
+.static-hero,
+.registration-hero,
+.workshops-hero{
+ color:var(--ink);background:var(--surface);border-bottom:1px solid var(--line)
+}
+.static-hero:before,.registration-hero:after,.workshops-hero:after{display:none}
+.static-hero{padding:0}
+.static-hero .wrap,
+.registration-hero-grid,
+.workshops-hero-grid{
+ min-height:470px;padding:72px 0;grid-template-columns:minmax(0,1.08fr) minmax(330px,.72fr);gap:76px
+}
+.static-hero h1,
+.registration-hero h1,
+.workshops-hero h1{
+ max-width:780px;margin:16px 0 18px;color:var(--ink);font-size:clamp(48px,5vw,66px);line-height:1.04
+}
+.static-hero p,.registration-hero p,.workshops-hero p{max-width:720px;color:var(--muted)}
+.static-hero img{height:350px;border-radius:22px;box-shadow:0 20px 50px rgba(8,38,80,.1)}
+.registration-hero .eyebrow.pale,.workshops-hero .eyebrow.pale{color:var(--blue)}
+.registration-meta span{padding:9px 13px;color:var(--blue);background:#fff;border:1px solid #cbdceb}
+.registration-price,.workshops-hero-mark{
+ width:230px;height:190px;margin-left:auto;border:1px solid #cbdceb;border-radius:20px;background:#fff;
+ box-shadow:0 20px 50px rgba(8,38,80,.09)
+}
+.registration-price small{color:var(--blue);font-size:11px}
+.registration-price strong{color:var(--ink);font:800 38px/1.1 "Libre Franklin",sans-serif}
+.registration-price span{max-width:165px;color:var(--muted);font-size:12px}
+.workshops-hero-mark strong{align-self:end;color:var(--blue);font:800 54px/1 "Libre Franklin",sans-serif}
+.workshops-hero-mark span{align-self:start;max-width:150px;color:var(--muted);font-size:12px}
+
+/* Inicio alineado con el sistema */
+.home-hero{background:var(--surface)}
+.hero-grid{min-height:660px}
+.hero-copy h1{font-size:clamp(52px,5.3vw,70px)}
+.hero-copy>p{font-size:17px!important}
+.access-hub{padding:52px 0;background:var(--blue);border-top:0}
+.access-hub:after{display:none}
+.access-hub-heading{margin-bottom:30px}
+.access-hub-heading h2{font-size:37px}
+.access-hub-heading>p{font-size:15px!important}
+.access-card{padding:27px;border-radius:16px}
+.access-card h3{font-size:19px}
+.access-card p{font-size:14px!important}
+.access-card>a{font-size:13px!important}
+
+/* Secciones, tarjetas e imágenes unificadas */
+.section,.registration-content,.workshops-content{padding:88px 0;background:#fff}
+.split-section,.tests-process{padding:88px 0;background:var(--surface)}
+.intro,.section-title{margin-bottom:52px}
+.intro p,.section-title p,.rich-text p{font-size:16px!important}
+.cards{gap:24px}
+.card,
+.registration-field,
+.info-card,.bank-card,.help-card,
+.workshop-card,.workshops-empty,
+.form,.hours{
+ border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(8,38,80,.05)
+}
+.card{min-height:285px;padding:30px 27px}
+.card p{font-size:15px!important}
+.card .icon{width:52px;height:52px;border-radius:14px;font-size:23px}
+.gallery{gap:18px;margin-top:58px}
+.gallery img{border-radius:18px}
+.rich-grid>img,.tests-process-photo img{border-radius:18px}
+.fact{padding:24px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.fact b{font-size:16px}
+.fact span{font-size:13px}
+
+/* Contacto y preguntas */
+.contact-grid,.faq-grid{gap:70px}
+.contact-info>a{padding:18px 0;font-size:15px}
+.contact-info small{font-size:12px}
+.hours{padding:24px}
+.hours span{font-size:14px}
+.form{padding:34px}
+.form label,.registration-field legend{font-size:14px}
+.form input,.form textarea,.form select,
+.registration-field>input:not([type=file]),.registration-field textarea,.registration-field select{
+ min-height:50px;padding:13px 14px;font-size:15px;border-radius:10px
+}
+.accordion button{padding:24px 0;font-size:16px;font-weight:750}
+.accordion article p{font-size:15px!important}
+
+/* Inscripción */
+.registration-content{background:#fff}
+.registration-grid{gap:34px}
+.registration-form-heading h2{font-size:38px}
+.registration-form-heading p{font-size:15px!important}
+.registration-form{gap:18px}
+.registration-field{padding:28px}
+.registration-field legend{font-size:15px}
+.registration-aside{top:125px;gap:20px}
+.info-card,.bank-card,.help-card{padding:30px}
+.info-card h2,.bank-card h2{font-size:24px}
+.info-rich p{font-size:14.5px!important}
+.bank-card{color:#fff;background:var(--ink);border:0}
+.help-card{background:#fffaf0}
+
+/* Talleres */
+.workshops-content{background:#fff}
+.workshops-heading{margin-bottom:38px}
+.workshops-heading h2{font-size:40px}
+.workshops-heading>p{font-size:15px!important}
+.workshops-grid{gap:24px}
+.workshop-card{border-radius:18px}
+.workshop-card-body{padding:26px}
+.workshop-card-body p{font-size:15px!important}
+
+/* Tests */
+.tests-benefits{background:#fff}
+.tests-process-photo{height:500px}
+.tests-steps li p{font-size:15px!important}
+.tests-cta{background:var(--blue)}
+
+/* Footer más legible */
+.site-footer .brand img{width:60px;height:60px}
+.site-footer .brand strong{font-size:20px}
+.site-footer .brand small{font-size:10px}
+.site-footer .footer-brand-column>p{font-size:14px}
+.site-footer h3{font-size:13px}
+.site-footer .footer-grid>div:not(:first-child)>a{font-size:14px;margin-bottom:14px}
+.footer-project{font-size:12px}
+.site-footer .copyright{font-size:12px}
+.footer-cta p{font-size:16px!important}
+
+/* Tablet */
+@media(max-width:1180px){
+ .container{width:min(100% - 40px,1100px)}
+ .site-header .brand{min-width:auto}
+ .site-header .brand small{display:none}
+ .site-nav>a,.nav-dropdown-toggle{padding:0 10px;font-size:12.5px}
+ .site-header .header-inner{gap:16px}
+}
+@media(max-width:980px){
+ .site-header{height:78px}
+ .site-header .brand img{width:54px;height:54px}
+ .site-header .brand strong{font-size:19px}
+ .menu{width:48px;height:48px}
+ .site-nav{top:calc(100% + 10px)}
+ .site-nav>a,.nav-dropdown-toggle{min-height:52px;font-size:15px;padding:0 16px}
+ .nav-dropdown-menu b{font-size:14px}
+ .nav-dropdown-menu small{font-size:12px}
+ .static-hero .wrap,.registration-hero-grid,.workshops-hero-grid{
+   min-height:auto;grid-template-columns:1fr;gap:34px;padding:64px 0
+ }
+ .registration-price,.workshops-hero-mark{margin:0;width:100%;height:auto;min-height:150px}
+ .registration-price span{max-width:none}
+ .contact-grid,.faq-grid,.registration-grid{grid-template-columns:1fr;gap:45px}
+ .registration-aside{position:static}
+}
+
+/* Celulares */
+@media(max-width:620px){
+ body{font-size:16px}
+ .container{width:calc(100% - 30px)}
+ .topbar-message{font-size:11px}
+ .site-header{height:74px}
+ .site-header .brand{gap:10px}
+ .site-header .brand img{width:50px;height:50px}
+ .site-header .brand strong{font-size:18px}
+ .menu{width:46px;height:46px}
+ .static-hero .wrap,.registration-hero-grid,.workshops-hero-grid{padding:52px 0}
+ .static-hero h1,.registration-hero h1,.workshops-hero h1,.hero-copy h1{
+   font-size:clamp(38px,11vw,48px)
+ }
+ main p,.card p,.access-card p,.info-rich p{font-size:15px!important}
+ .section,.registration-content,.workshops-content,.split-section,.tests-process{padding:62px 0}
+ .card{min-height:auto;padding:26px 23px}
+ .gallery{grid-template-columns:1fr;grid-template-rows:none}
+ .gallery img,.gallery img:first-child{height:240px;grid-row:auto}
+ .form,.registration-field,.info-card,.bank-card,.help-card{padding:23px}
+ .workshops-heading h2,.registration-form-heading h2{font-size:32px}
+ .footer-cta p{font-size:15px!important}
+ .site-footer .footer-brand-column>p,.site-footer .footer-grid>div:not(:first-child)>a{font-size:14px}
+}

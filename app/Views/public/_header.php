@@ -13,7 +13,7 @@ $currentPublicPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: 
 <header class="site-header">
     <div class="container header-inner">
         <a class="brand" href="<?=url('/')?>" aria-label="Ruta Docente, inicio">
-            <img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente" width="52" height="52">
+            <img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente" width="62" height="62">
             <div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div>
         </a>
         <button class="menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="public-navigation">
