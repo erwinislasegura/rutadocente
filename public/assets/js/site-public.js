@@ -36,6 +36,7 @@ document.querySelectorAll('.site-nav a').forEach(link => {
   const linkPath = normalizePublicPath(new URL(link.href, window.location.href).pathname);
   const isActive = linkPath === normalizePublicPath(window.location.pathname);
   link.classList.toggle('active', isActive);
+  if (isActive) link.setAttribute('aria-current', 'page');
   if (isActive && link.closest('.nav-dropdown-menu')) dropdownButton?.classList.add('active');
   link.addEventListener('click', closePublicMenu);
 });
@@ -47,7 +48,7 @@ document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closePublicMenu();
 });
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 900) closePublicMenu();
+  if (window.innerWidth > 1100) closePublicMenu();
 });
 
 document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => {

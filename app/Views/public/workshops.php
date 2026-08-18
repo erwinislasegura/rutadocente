@@ -5,7 +5,7 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="Talleres, actividades y formularios de inscripción disponibles para docentes en Ruta Docente.">
  <title>Talleres disponibles | Ruta Docente</title>
- <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260818-public-v5c')?>">
+ <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260818-public-v6')?>">
  <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body class="workshops-page">
@@ -38,6 +38,6 @@
 </main>
 
 <?php require __DIR__.'/_footer.php'; ?>
-<script src="<?=url('/assets/js/site-public.js')?>"></script>
+<script src="<?=url('/assets/js/site-public.js?v=20260818-public-v6')?>"></script>
 </body>
 </html>
