@@ -8,7 +8,7 @@ $linkCount=count(array_filter($resources,fn($resource)=>!empty($resource['extern
  <header class="admin-resource-hero">
   <div class="admin-resource-title">
    <span class="admin-resource-kicker"><?=$isTest?'EVALUACIÓN Y PRÁCTICA':'ANÁLISIS PEDAGÓGICO'?></span>
-   <h2><?=$isTest?'Tests':'Tabuladores'?></h2>
+   <h2><?=$isTest?'Tests':'Talleres asincrónicos'?></h2>
    <p><?=$isTest?'Gestiona evaluaciones, archivos y actividades en línea según cada asignatura.':'Organiza herramientas de análisis por asignatura, grupo y subgrupo.'?></p>
   </div>
   <a class="btn btn-brand admin-resource-create" href="<?=url('/admin/recursos/formulario?type='.$type)?>">+ Crear <?=$isTest?'test':'tabulador'?></a>
