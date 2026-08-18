@@ -5,12 +5,11 @@
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="description" content="Tests y evaluaciones para fortalecer la preparación docente 2026">
  <title>Tus test | Ruta Docente 2026</title>
- <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260810-accesshub1')?>">
+ <link rel="stylesheet" href="<?=url('/assets/css/site.css?v=20260818-public-v3')?>">
  <link rel="icon" href="<?=url('/assets/img/logo-ruta-docente.png')?>">
 </head>
 <body class="tests-public-page">
-<div class="topbar"><div class="container"><span>Apoyo docente para todo Chile</span><div><a href="mailto:aulaentretenida0@gmail.com">✉ aulaentretenida0@gmail.com</a><a href="tel:+56975778434">☎ +56 9 7577 8434</a></div></div></div>
-<header><div class="container header-inner"><a class="brand" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Logo Ruta Docente"><div><strong>Ruta Docente</strong><small>Portafolio Docente 2026</small></div></a><button class="menu" aria-label="Abrir menú" aria-expanded="false">☰</button><nav><a href="<?=url('/')?>">Inicio</a><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a class="active" href="<?=url('/tests')?>">Tus test</a><a href="<?=url('/talleres-asincronicos')?>">Talleres asincrónicos</a><a href="<?=url('/recursos')?>">Recursos</a><a href="<?=url('/inscripcion')?>">Talleres disponibles</a><a href="<?=url('/contacto')?>">Contacto</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a></nav><a class="pill header-cta" href="<?=url('/login')?>">Acceso docente</a></div></header>
+<?php require __DIR__.'/_header.php'; ?>
 
 <main>
  <section class="static-hero tests-static-hero">
@@ -29,8 +28,7 @@
  <section class="cta tests-cta"><div class="container cta-inner"><div><span class="eyebrow pale">TU PRÓXIMO PASO</span><h2>Prepárate con mayor confianza.</h2><p>Ingresa a tu espacio docente y revisa los test disponibles para tu asignatura.</p></div><a class="btn white" href="<?=url('/login')?>">Acceder a tus test →</a></div></section>
 </main>
 
-<a class="whatsapp" href="https://wa.me/56975778434" aria-label="WhatsApp">◉</a>
-<footer><div class="container footer-grid"><div><a class="brand light" href="<?=url('/')?>"><img src="<?=url('/assets/img/logo-ruta-docente.png')?>" alt="Ruta Docente"><div><strong>Ruta Docente</strong><small>Enseñar, avanzar, transformar.</small></div></a><p>Recursos claros y acompañamiento cercano para fortalecer tu práctica, tu portafolio y el aprendizaje de tus estudiantes.</p></div><div><h3>Explora</h3><a href="<?=url('/asignaturas')?>">Asignaturas</a><a href="<?=url('/portafolio')?>">Portafolio</a><a href="<?=url('/clases-asincronicas')?>">Clases asincrónicas</a><a href="<?=url('/tests')?>">Tus test</a></div><div><h3>Ayuda</h3><a href="<?=url('/recursos')?>">Recursos</a><a href="<?=url('/preguntas-frecuentes')?>">Preguntas frecuentes</a><a href="<?=url('/contacto')?>">Contacto</a></div><div><h3>Conversemos</h3><a href="mailto:aulaentretenida0@gmail.com">aulaentretenida0@gmail.com</a><a href="tel:+56975778434">+56 9 7577 8434</a><a href="https://www.facebook.com/AulaEntretenida">Facebook · Aula Entretenida</a></div></div><div class="container copyright"><span>© 2026 Ruta Docente. Todos los derechos reservados.</span><span>Hecho con dedicación para docentes de Chile 🇨🇱</span></div></footer>
+<?php require __DIR__.'/_footer.php'; ?>
 <script src="<?=url('/assets/js/site-public.js')?>"></script>
 </body>
 </html>

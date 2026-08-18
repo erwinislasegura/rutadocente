@@ -1,25 +1,53 @@
 const publicScript = document.currentScript;
 const publicBase = publicScript?.src ? new URL(publicScript.src).pathname.replace(/\/assets\/js\/site-public\.js$/, '') : '';
 const menuButton = document.querySelector('.menu');
-const publicNav = document.querySelector('header nav');
+const publicNav = document.querySelector('.site-nav');
+const dropdown = document.querySelector('.nav-dropdown');
+const dropdownButton = document.querySelector('.nav-dropdown-toggle');
 const normalizePublicPath = path => {
   const withoutBase = publicBase && path.startsWith(publicBase) ? path.slice(publicBase.length) : path;
   const normalized = withoutBase.replace(/\/+$/, '') || '/';
-  return normalized === '/correctores-ia' ? '/tests' : normalized;
+  if (normalized === '/correctores-ia') return '/tests';
+  if (normalized === '/tabuladores') return '/talleres-asincronicos';
+  return normalized;
+};
+const closePublicMenu = () => {
+  publicNav?.classList.remove('open');
+  dropdown?.classList.remove('open');
+  menuButton?.setAttribute('aria-expanded', 'false');
+  dropdownButton?.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('nav-open');
 };
 
 menuButton?.addEventListener('click', () => {
   const isOpen = publicNav?.classList.toggle('open') || false;
   menuButton.setAttribute('aria-expanded', String(isOpen));
+  document.body.classList.toggle('nav-open', isOpen);
+  if (!isOpen) dropdown?.classList.remove('open');
 });
 
-document.querySelectorAll('header nav a').forEach(link => {
+dropdownButton?.addEventListener('click', event => {
+  event.stopPropagation();
+  const isOpen = dropdown?.classList.toggle('open') || false;
+  dropdownButton.setAttribute('aria-expanded', String(isOpen));
+});
+
+document.querySelectorAll('.site-nav a').forEach(link => {
   const linkPath = normalizePublicPath(new URL(link.href, window.location.href).pathname);
-  link.classList.toggle('active', linkPath === normalizePublicPath(window.location.pathname));
-  link.addEventListener('click', () => {
-    publicNav?.classList.remove('open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  });
+  const isActive = linkPath === normalizePublicPath(window.location.pathname);
+  link.classList.toggle('active', isActive);
+  if (isActive && link.closest('.nav-dropdown-menu')) dropdownButton?.classList.add('active');
+  link.addEventListener('click', closePublicMenu);
+});
+
+document.addEventListener('click', event => {
+  if (!event.target.closest('.site-header')) closePublicMenu();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closePublicMenu();
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) closePublicMenu();
 });
 
 document.querySelectorAll('.filters button').forEach(button => button.addEventListener('click', () => {
