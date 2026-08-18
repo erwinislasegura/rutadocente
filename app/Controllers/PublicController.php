@@ -15,7 +15,7 @@ class PublicController extends Controller {
  function preguntasFrecuentes():void{$this->publicPage('preguntas-frecuentes');}
 
  function sitemap():void {
-  $pages=['/'=>['1.0','weekly'],'/portafolio'=>['0.9','weekly'],'/recursos'=>['0.9','weekly'],'/tests'=>['0.8','weekly'],'/tabuladores'=>['0.8','weekly'],'/clases-asincronicas'=>['0.8','weekly'],'/asignaturas'=>['0.8','weekly'],'/inscripcion'=>['0.7','weekly'],'/preguntas-frecuentes'=>['0.6','monthly'],'/contacto'=>['0.6','monthly']];
+  $pages=['/'=>['1.0','weekly'],'/portafolio'=>['0.9','weekly'],'/recursos'=>['0.9','weekly'],'/tests'=>['0.8','weekly'],'/talleres-asincronicos'=>['0.8','weekly'],'/clases-asincronicas'=>['0.8','weekly'],'/asignaturas'=>['0.8','weekly'],'/inscripcion'=>['0.7','weekly'],'/preguntas-frecuentes'=>['0.6','monthly'],'/contacto'=>['0.6','monthly']];
   foreach((new PublicForm)->forms() as $form)if($form['status']==='open')$pages['/inscripcion?form='.rawurlencode($form['slug'])]=['0.6','weekly'];
   header('Content-Type: application/xml; charset=UTF-8');
   echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
