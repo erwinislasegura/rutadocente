@@ -11,7 +11,7 @@ $linkCount=count(array_filter($resources,fn($resource)=>!empty($resource['extern
    <h2><?=$isTest?'Tests':'Talleres asincrónicos'?></h2>
    <p><?=$isTest?'Gestiona evaluaciones, archivos y actividades en línea según cada asignatura.':'Organiza herramientas de análisis por asignatura, grupo y subgrupo.'?></p>
   </div>
-  <a class="btn btn-brand admin-resource-create" href="<?=url('/admin/recursos/formulario?type='.$type)?>">+ Crear <?=$isTest?'test':'tabulador'?></a>
+  <a class="btn btn-brand admin-resource-create" href="<?=url('/admin/recursos/formulario?type='.$type)?>">+ Crear <?=$isTest?'test':'taller asincrónico'?></a>
   <div class="admin-resource-stats">
    <div><span class="resource-stat-icon">Σ</span><p><strong><?=count($resources)?></strong><small>Total registrado</small></p></div>
    <div><span class="resource-stat-icon active">✓</span><p><strong><?=$activeCount?></strong><small>Visibles</small></p></div>
@@ -26,7 +26,7 @@ $linkCount=count(array_filter($resources,fn($resource)=>!empty($resource['extern
  </section>
 
  <?php if(!$resources):?>
-  <section class="admin-resource-empty"><span><?=$isTest?'✓':'▦'?></span><h3>Aún no hay <?=$isTest?'tests':'tabuladores'?>.</h3><p>Crea el primer recurso para comenzar a construir la biblioteca docente.</p><a class="btn btn-brand" href="<?=url('/admin/recursos/formulario?type='.$type)?>">Crear ahora →</a></section>
+  <section class="admin-resource-empty"><span><?=$isTest?'✓':'▦'?></span><h3>Aún no hay <?=$isTest?'tests':'talleres asincrónicos'?>.</h3><p>Crea el primer recurso para comenzar a construir la biblioteca docente.</p><a class="btn btn-brand" href="<?=url('/admin/recursos/formulario?type='.$type)?>">Crear ahora →</a></section>
  <?php else:?>
   <section class="admin-resource-list" data-admin-resource-list>
    <div class="admin-resource-list-head" aria-hidden="true"><span>Recurso</span><span>Disponibilidad</span><span>Estado</span><span>Acciones</span></div>
