@@ -477,8 +477,8 @@ footer:before{content:"";position:absolute;right:-100px;top:-150px;width:320px;h
 .activaweb-copy h2{max-width:550px;margin:0 0 10px;font-size:29px;line-height:1.14}
 .activaweb-copy h2 strong{color:var(--blue);font-weight:inherit}
 .activaweb-copy p{max-width:570px;margin:0;color:var(--muted);font-size:12px;line-height:1.65}
-.activaweb-logo{display:flex;align-items:center;justify-content:center;min-height:108px;padding:20px 25px;border:1px solid #d7e2ec;border-radius:14px;background:#fff;box-shadow:0 14px 38px rgba(3,30,76,.08);transition:.22s ease}
-.activaweb-logo:hover{border-color:#a9c5e2;transform:translateY(-3px);box-shadow:0 19px 42px rgba(3,30,76,.12)}
+.activaweb-logo{display:flex;align-items:center;justify-content:center;min-height:108px;padding:20px 25px;border:1px solid #1264c3;border-radius:14px;background:#061b3a;box-shadow:0 14px 38px rgba(3,30,76,.16);transition:.22s ease}
+.activaweb-logo:hover{border-color:#19b65b;transform:translateY(-3px);box-shadow:0 19px 42px rgba(3,30,76,.2)}
 .activaweb-logo img{display:block;width:100%;height:auto;max-height:72px;object-fit:contain}
 .activaweb-link{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:47px;padding:0 18px;border:1px solid var(--blue);border-radius:7px;color:var(--blue);background:#fff;font-size:11px;font-weight:900;white-space:nowrap;transition:.2s ease}
 .activaweb-link:hover{color:#fff;background:var(--blue);transform:translateY(-2px)}
